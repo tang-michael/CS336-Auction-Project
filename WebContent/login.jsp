@@ -29,6 +29,7 @@
         
         if(rs.getString("pwd").equals(password) && rs.getString("login_id").equals(userid)){
             out.println("Welcome " +userid);
+            out.println("<a href='logout.jsp'>Logout</a>");
         }
         
         //Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
