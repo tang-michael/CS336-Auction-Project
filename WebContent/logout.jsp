@@ -9,13 +9,7 @@
         <title>BuyMe</title>
     </head>
     <body>
-        <form action="login.jsp" method="post">
-            User name :<input type="text" name="usr" />
-            <br>
-            password :<input type="password" name="password" />
-            <br>
-            <input type ="submit" value = "Submit" /> 
-         </form>
-            <p>New user <a href ="register.html">Login Here</a>. 
+        <p>You have been logged out. Thank you for visiting.</p>
+        <p>Return to Login <a href ="index.jsp">Login</a>.</p> 
     </body>
 </html>
