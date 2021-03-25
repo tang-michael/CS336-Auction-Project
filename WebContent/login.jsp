@@ -28,12 +28,14 @@
 	
 	boolean exist = false;
 	while(rs.next()){
+		System.out.println(rs.getString("login_id") + " " + userid);
 		if(rs.getString("login_id").equals(userid) && rs.getString("pwd").equals(password)){
 			exist = true;
 			break;
 		}
-		rs.next();
+		
 	}
+
 	
 	boolean isAdmin = false;
 	
@@ -43,7 +45,6 @@
 		if(rsAdmin.getString("login_id").equals(userid)){
 			isAdmin = true;
 		}
-		rsAdmin.next();
 	}
 	
 	ResultSet rsCustomerRep = st1.executeQuery("SELECT * FROM customer_representatives");
@@ -54,7 +55,6 @@
 		if(rsCustomerRep.getString("login_id").equals(userid)){
 			isCustomerRep = true;
 		}
-		rsCustomerRep.next();
 	}
 	
 	if(exist == false){
