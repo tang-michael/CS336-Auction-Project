@@ -18,59 +18,59 @@
 	Statement st = con.createStatement();
 	Statement st1 = con.createStatement();
 	Statement st2 = con.createStatement();
+	
 
 	String userid = request.getParameter("usr");
 	session.putValue("usr", userid);
 	String password = request.getParameter("password");
 
-	ResultSet rs = st.executeQuery(
-			"SELECT * FROM users");
-	
+	ResultSet rs = st.executeQuery("SELECT * FROM users");
+
 	boolean exist = false;
-	while(rs.next()){
-		System.out.println(rs.getString("login_id") + " " + userid);
-		if(rs.getString("login_id").equals(userid) && rs.getString("pwd").equals(password)){
+	while (rs.next()) {
+
+		if (rs.getString("login_id").equals(userid) && rs.getString("pwd").equals(password)) {
 			exist = true;
 			break;
 		}
-		
+
 	}
 
-	
 	boolean isAdmin = false;
-	
+
 	ResultSet rsAdmin = st1.executeQuery("SELECT * FROM admins");
 	
-	while(rsAdmin.next()){
-		if(rsAdmin.getString("login_id").equals(userid)){
+
+	while (rsAdmin.next()) {
+		if (rsAdmin.getString("login_id").equals(userid)) {
 			isAdmin = true;
 		}
 	}
-	
+
 	ResultSet rsCustomerRep = st1.executeQuery("SELECT * FROM customer_representatives");
-	
+
 	boolean isCustomerRep = false;
-	
-	while(rsCustomerRep.next()){
-		if(rsCustomerRep.getString("login_id").equals(userid)){
+
+	while (rsCustomerRep.next()) {
+		if (rsCustomerRep.getString("login_id").equals(userid)) {
 			isCustomerRep = true;
 		}
 	}
-	
-	if(exist == false){
+
+	if (exist == false) {
 		out.println("Invalid password");
 		out.println("<p>Return to Login <a href ='index.jsp'>Login</a>.</p> ");
-	}else if(exist == true && isAdmin == true){
+	} else if (exist == true && isAdmin == true) {
 		out.println("Welcome " + userid);
 		out.println("You are an admin!");
 		out.println("<a href='logout.jsp'>Logout</a>");
-	}else if(exist == true && isCustomerRep == true){
+	} else if (exist == true && isCustomerRep == true) {
 		out.println("Welcome " + userid);
 		out.println("You are a customer rep!");
-		out.println("<a href='logout.jsp'>Logout</a>");		
-	}else if(exist == true){
-		out.println("Welcome " + userid);
 		out.println("<a href='logout.jsp'>Logout</a>");
+	} else if (exist == true) {
+		response.sendRedirect("user.jsp?name=" + userid);
+	
 	}
 
 	//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
