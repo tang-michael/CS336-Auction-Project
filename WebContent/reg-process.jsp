@@ -20,11 +20,13 @@
         
         String fname = request.getParameter("fname");
         String lname = request.getParameter("lname");
-        String loginId = request.getParameter("email");
         String userID = request.getParameter("userid");
         String password = request.getParameter("password");
         
-        st.executeUpdate("INSERT INTO users values (" + "'" + loginId +"'" + "," + " '" + password + "');");
+        String query = "INSERT INTO users values (" + "'" + fname + "'," + "'" + lname + "',"  + "'" + userID +"'" + "," + " '" + password + "');";
+        System.out.println(query);
+        st.executeUpdate(query);
+       
         out.println("Thank you for register ! Please <a href='index.jsp'>Login</a> to continue.");
       }   
       catch(Exception e){
