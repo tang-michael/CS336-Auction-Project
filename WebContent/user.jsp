@@ -18,8 +18,10 @@
 	Statement stItems = null;
 	ResultSet rsItems = null;
 	
+	String current_user = request.getParameter("name");
+	
 	out.println("<h1>Auction</h1>");
-	out.println("Welcome " + request.getParameter("name") + "!"); 
+	out.println("Welcome " + current_user + "!"); 
 	out.println("<a href='logout.jsp'>Logout</a>"); 
 	out.println("<h3>Current Items</h3>");
 	String sql = "select * from item";
@@ -44,9 +46,10 @@
 		<tbody>
 			<%
 			while (rsItems.next()) {
+				String id = rsItems.getString("item_id");
 			%>
 			<tr>
-				<td><%=rsItems.getString("login_id")%></td>
+				<td><a href="item.jsp?item_id=<%=id%>&name=<%=current_user%>"><%=rsItems.getString("login_id")%></a></td>
 				<td><%=rsItems.getString("item_id")%></td>
 				<td><%=rsItems.getString("current_bid")%></td>
 				<td><%=rsItems.getString("item_type")%></td>
@@ -59,5 +62,8 @@
 			%>
 		</tbody>
 	</table>
+	<%
+	con.close();
+	%>
 </body>
 </html>
