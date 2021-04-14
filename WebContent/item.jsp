@@ -30,26 +30,34 @@
 	
 	<a href="user.jsp?name=<%=current_user%>">Go Back</a>
 	<div class="item-body">
-		<b>Seller:</b><%=rsItems.getString("login_id")%>
+		<div class="item-header">
+			<b>Seller:</b><%=rsItems.getString("login_id")%>
+		</div>
 		<br />
-		<b>Item ID:</b><%=rsItems.getString("item_id")%>
+		<div class="item-description">
+			<b>Item Type:</b><%=rsItems.getString("item_type")%>
+			<br />
+			<b>Brand:</b> <%=rsItems.getString("brand")%>
+		</div>
 		<br />
-		<b>Current Bid:</b><%=rsItems.getString("current_bid")%>
-		<br />
-		<b>Item Type:</b><%=rsItems.getString("item_type")%>
-		<br />
-		<b>Brand:</b> <%=rsItems.getString("brand")%>
-		<br />
-		<b>Initial Price:</b> <%=rsItems.getString("initial_price")%>
-		<br />
-		<b>Min Increment:</b><%=rsItems.getString("min_increment")%>
+		<div class="item-price">
+			<b>Current Bid:</b><%=rsItems.getString("current_bid")%>
+			<br />
+			<b>Initial Price:</b> <%=rsItems.getString("initial_price")%>
+			<br />
+			<b>Min Increment:</b><%=rsItems.getString("min_increment")%>
+		</div>
+		
+
 	</div>
 	<br />
-	Bid:<input type="text" name="bid_price" />
-    <br>
-    Autobid (Optional):<input type="text" name="autobid_price" />
-    <br>
-    <input type ="submit" value = "Submit" />
+	<form action="bidItem.jsp?item_id=<%=request.getParameter("item_id")%>&bid_irce=<%=%>">
+		Bid:<input type="text" name="bid_price" required/>
+	    <br>
+	    Autobid (Optional):<input type="text" name="autobid_price" />
+	    <br>
+	    <input type ="submit" value = "Submit" />
+    </form>
 	<%
 	con.close();
 	%>
