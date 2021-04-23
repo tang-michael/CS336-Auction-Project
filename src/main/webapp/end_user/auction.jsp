@@ -12,8 +12,8 @@
 </head>
 <body>
     <%
-    
-        Connection con = DbConnectionManager.getConnection();
+        DbConnectionManager db = new DbConnectionManager();
+        Connection con = db.getDbConnection();
         
         String sql = "select * from item where auction_id=" + request.getParameter("auction_id");
         Statement stItems = con.createStatement(); 

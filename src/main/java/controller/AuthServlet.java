@@ -44,6 +44,8 @@ public class AuthServlet extends HttpServlet {
 
         // set the authenticated user to the session.
         req.getSession().setAttribute(AttributeKeys.AUTHENTICATED_USER, user);
+        
+        req.getSession().setAttribute("user", userId);
 
         // redirect the user to their respective home pages.
         String redirectUrl = "";

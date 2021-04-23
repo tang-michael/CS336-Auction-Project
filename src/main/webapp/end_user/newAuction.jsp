@@ -13,7 +13,8 @@
 <body>
     <%
         
-        Connection con = DbConnectionManager.getConnection();
+        DbConnectionManager db = new DbConnectionManager();
+        Connection con = db.getDbConnection();
     
         //Create a SQL statement
         Statement st = con.createStatement();

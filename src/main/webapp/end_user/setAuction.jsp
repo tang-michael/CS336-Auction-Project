@@ -14,7 +14,9 @@
 
     <%
 
-    Connection con = DbConnectionManager.getConnection();
+    DbConnectionManager db = new DbConnectionManager();
+    Connection con = db.getDbConnection();
+    
     Statement stItems = null;
     ResultSet rsItems = null;
     
@@ -52,8 +54,8 @@
                     String time = rsItems.getString("closing_time");
                     
                     
-                    String dateStamp = new SimpleDateFormat("yyyy-mm-dd").format(Calendar.getInstance());
-                    String timeStamp = new SimpleDateFormat("hh:mm:ss").format(Calendar.getInstance().getTime());
+                    //String dateStamp = new SimpleDateFormat("yyyy-mm-dd").format(Calendar.getInstance());
+                    //String timeStamp = new SimpleDateFormat("hh:mm:ss").format(Calendar.getInstance().getTime());
                     
                 %>
                 <tr>

@@ -19,6 +19,7 @@
         %>
         <h2 class="navbar-brand">Online Auction System | <%=  user.getFullName() %></h2>
         <div class="nav-links right-nav-links">
+            <a href="setAuction.jsp">View Auctions and Bid Items</a>
             <a class="active-link" href="index.jsp">Questions</a>
             <a href="ask_question.jsp">Post Question</a>
             <a href="${pageContext.request.contextPath}/logout">Logout</a>

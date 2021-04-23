@@ -13,7 +13,8 @@
 <body>
     <%
        
-        Connection con = DbConnectionManager.getConnection();
+        DbConnectionManager db = new DbConnectionManager();
+        Connection con = db.getDbConnection();
     
         Statement stItems = null;
         ResultSet rsItems = null;
