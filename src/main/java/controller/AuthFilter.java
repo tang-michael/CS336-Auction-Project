@@ -51,4 +51,16 @@ public class AuthFilter implements Filter {
         // continue to the next filter.
         filterChain.doFilter(servletRequest, servletResponse);
     }
+
+    @Override
+    public void destroy() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void init(FilterConfig arg0) throws ServletException {
+        // TODO Auto-generated method stub
+        
+    }
 }

@@ -15,8 +15,8 @@ public class DbConnectionManager {
     private static final String dbName = "auction";
     private static final String dbPort = "3306";
     private static final String dbHost = "localhost";
-    private static final String user = "online_auction";
-    private static final String password = "p%ass&word";
+    private static final String user = "root";
+    private static final String password = "root";
 
     // Function returns the connection to the database. Creates it if it
     // did not exist.
