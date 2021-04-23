@@ -50,7 +50,8 @@
                                                " AND b.amount < " + bidPrice);
         
         while(alertData.next()){
-            st3.executeUpdate("INSERT INTO alerts VALUES('" + alertData.getString("login_id") + "', " + alertData.getInt("item_id") + ", " + alertData.getDouble("current_bid") + ");");
+            st3.executeUpdate("INSERT INTO alerts (login_id, item_id, current_bid) VALUES('" + alertData.getString("login_id") + "', " + alertData.getInt("item_id") + ", " + alertData.getDouble("current_bid") + 
+                               ") ON DUPLICATE KEY UPDATE current_bid = " + alertData.getDouble("current_bid") + ";");
         }
         
         out.println("Thank you for registering the item.");
