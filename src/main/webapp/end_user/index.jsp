@@ -3,6 +3,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="controller.AttributeKeys" %>
 <%@ page import="persistence.model.user.User" %>
+<%@ page import="persistence.db.*"%>
+<%@ page import="java.io.*,java.util.*,java.text.SimpleDateFormat,java.util.Date,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +34,24 @@
         QuestionService questionService = new QuestionService();
         String searchQuery = request.getParameter("searchQuery");
         List<Question> questionList = questionService.filterQuestionsByKeyWord(searchQuery);
+        
+        DbConnectionManager db = new DbConnectionManager();
+        Connection con = db.getDbConnection();
+    
+        Statement st = con.createStatement();
+        ResultSet alertsForUser = st.executeQuery("SELECT * FROM alerts a " + 
+                                                   "WHERE a.login_id = '" + session.getAttribute("user") + "';");
+        
+        int counter = 1;
+
+        while(alertsForUser.next()){
+            if(counter == 1){
+                out.println("<p>Alerts: </p>");
+            }
+            out.println("<p>The item with item id " + alertsForUser.getInt("item_id") + "has a higher bid of $" + alertsForUser.getDouble("current_bid") + " which is higher than you placed.</p><br>");
+            
+            counter++;
+        }
     %>
 
     <div class="container">
