@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="persistence.db.*"%>
-<%@ page import="java.io.*,java.util.*,java.text.SimpleDateFormat,java.util.Date,java.sql.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 <body>
 
     <%
-
+    
     DbConnectionManager db = new DbConnectionManager();
     Connection con = db.getDbConnection();
     
@@ -22,26 +22,35 @@
     
     String current_user = (String)session.getAttribute("user");
     
-    out.println("Welcome " + current_user);
+    out.println("<p>Welcome " + current_user + "</p>");
     
-    out.println("<a href = newAuctionDetails.jsp?name=" + current_user + ">Create a new Auction</a>");
+    out.println("<br>");
+    
+    out.println("<p>Create a new auction for an Item: <a href = postItem.jsp>Post Item</a></p>");
+    
     %>
     <section class="user-heading">
-        <h1>Auctions</h1>
+        <h1>Auction</h1>
         <% 
-        String sql = "select * from auctions";
+        String sql = "SELECT * FROM item i";
         stItems = con.createStatement(); 
         rsItems = stItems.executeQuery(sql);
         %>
     </section>
     
     <section class="user_items">
-        <h3>Current Auctions</h3>
+        <h3>Current Items</h3>
         <table>
             <thead>
     
                 <tr>
-                    <th>Auction Id</th>
+                    <th>Item Id</th>
+                    <th>Seller</th>
+                    <th>Current Bid</th>
+                    <th>Item type</th>
+                    <th>Brand</th>
+                    <th>Initial Price</th>
+                    <th>Characteristics</th>
                     <th>Closing Date</th>
                     <th>Closing Time</th>
                 </tr>
@@ -49,19 +58,18 @@
             <tbody>
                 <%
                 while (rsItems.next()) {
-                    String id = rsItems.getString("auction_id");
-                    String date = rsItems.getString("closing_date");
-                    String time = rsItems.getString("closing_time");
-                    
-                    
-                    //String dateStamp = new SimpleDateFormat("yyyy-mm-dd").format(Calendar.getInstance());
-                    //String timeStamp = new SimpleDateFormat("hh:mm:ss").format(Calendar.getInstance().getTime());
-                    
+                    String id = rsItems.getString("item_id");
                 %>
                 <tr>
-                    <td><a href="auction.jsp?auction_id=<%=id%>"><%=id%></a></td>
-                    <td><%=date%></td>
-                    <td><%=time%></td>
+                    <td><a href="item.jsp?item_id=<%=id%>"><%=id%></a></td>
+                    <td><%=rsItems.getString("login_id")%></td>
+                    <td>$<%=rsItems.getString("current_bid")%></td>
+                    <td><%=rsItems.getString("item_type")%></td>
+                    <td><%=rsItems.getString("brand")%></td>
+                    <td>$<%=rsItems.getString("initial_price")%></td>
+                    <td><%=rsItems.getString("characteristics")%></td>
+                    <td><%=rsItems.getString("closing_date") %></td>
+                    <td><%=rsItems.getString("closing_time") %></td>
                 </tr>
                 <%
                 }
@@ -70,6 +78,8 @@
         </table>
     </section>
     <%
+    
+    out.println("<p>To go back to the homepage: <a href = index.jsp>Home</a></p>");
     con.close();
     %>
 </body>

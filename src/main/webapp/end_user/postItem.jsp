@@ -26,8 +26,6 @@
             <br>
             Login ID:<input type="text" name="login_id" />
             <br>
-            Auction ID:<input type="text" name="auction_id" />
-            <br>
             Brand Name:<input type="text" name="brandName" />
             <br>
             Initial Price:<input type="text" name="initPrice" />
@@ -37,6 +35,10 @@
             Characteristics :<input type="text" name="characteristics" />
             <br>
             Minimum Price :<input type="text" name="minPrice" />
+            <br>
+            Closing Date (Please enter date in yyyy-mm-dd format) :<input type="text" name="closing_date" />
+            <br>
+            Closing Time (Please enter time in 24hr format in hh:mm:ss) :<input type="text" name="closing_time" />
             <br>
             <input type ="submit" value = "Submit" /> 
         </form>

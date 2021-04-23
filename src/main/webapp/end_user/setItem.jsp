@@ -29,8 +29,9 @@
         double init_Price = Double.parseDouble(request.getParameter("initPrice"));
         String itemName = request.getParameter("itemName");
         String characteristics = request.getParameter("characteristics");
-        int auctionId = Integer.parseInt(request.getParameter("auction_id"));
         double min_Price = Double.parseDouble(request.getParameter("minPrice"));
+        String closing_date = request.getParameter("closing_date");
+        String closing_time = request.getParameter("closing_time");
     
         ResultSet itemNum = st1.executeQuery("SELECT MAX(i.item_id) FROM item i");
         
@@ -44,7 +45,9 @@
             itemNumber = 1;
         }
         
-        st.executeUpdate("INSERT INTO item VALUES(" + itemNumber + ", " + auctionId + ", '" + loginID + "', '" + itemType + "', '"+ brandName + "', " + 0 + ", " + init_Price + ", " + min_Price + ", '" + characteristics + "');");
+        st.executeUpdate("INSERT INTO item VALUES(" + itemNumber + ", '" + loginID + "', '" + itemType + "', '"+ brandName + "', " + 0 + ", " + 
+                                                      init_Price + ", " + min_Price + ", '" + characteristics + "', '" + closing_date + 
+                                                      "', '" + closing_time + "');");
         
         if(itemType.equals("computerAccessories")){
             st1.executeUpdate("INSERT INTO computer_accessories VALUES(" + itemNumber  + ");");
@@ -59,6 +62,7 @@
             st4.executeUpdate("INSERT INTO camera VALUES(" + itemNumber  + ");");
         }
         out.println("Thank you for registering the item.");
+        out.println("<p>To go back to the auctions page: <a href=setAuction.jsp>Auctions</a></p>");
                 
         //Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
         con.close();
