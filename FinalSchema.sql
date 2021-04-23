@@ -19,12 +19,13 @@ CREATE TABLE auctions
   
 
 CREATE TABLE end_user
-  ( email varchar(20) NOT NULL,
+  ( email varchar(200) NOT NULL,
    login_id varchar(50) NOT NULL,
   primary key (login_id),
   foreign key(login_id) references users(login_id)
   );
   
+
 
 
 CREATE TABLE buyer
@@ -216,6 +217,10 @@ VALUES ('2021-03-23', 'Admin_01');
 
 INSERT INTO customer_representatives
 VALUES ('2021-03-23', 'Customer_Support');
+
+INSERT INTO end_user
+VALUES('tangmichael4502@gmail.com', 'michael');
+  
 
 -- DROP TABLE item;
 -- DROP TABLE computer_accessories;
