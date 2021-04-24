@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="persistence.db.*"%>
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*,java.util.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*,java.text.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +20,9 @@
     Statement stItems = null;
     ResultSet rsItems = null;
     
+    Statement st = con.createStatement();
+    
+    
     String current_user = (String)session.getAttribute("user");
     
     out.println("<p>Welcome " + current_user + "</p>");
@@ -27,6 +30,39 @@
     out.println("<br>");
     
     out.println("<p>Create a new auction for an Item: <a href = postItem.jsp>Post Item</a></p>");
+    
+    Statement st1 = con.createStatement();
+    ResultSet alertsForUser = st1.executeQuery("SELECT * FROM alerts a " + 
+                                               "WHERE a.login_id = '" + session.getAttribute("user") + "';");
+    
+    Statement st2 = con.createStatement();
+    ResultSet winnerAlertsForUser = st2.executeQuery("SELECT * FROM winner_alerts a " + 
+            "WHERE a.login_id = '" + session.getAttribute("user") + "';");
+    
+    int counter = 1;
+
+    while(alertsForUser.next()){
+        
+        if(counter == 1){
+            out.println("<br><p>Alerts: </p>");
+        }
+        out.println("<p>The item with item id " + alertsForUser.getInt("item_id") + "has a higher bid of $" + alertsForUser.getDouble("current_bid") + " which is higher than you placed.</p><br>");
+        
+        counter++;
+    }
+    
+    while(winnerAlertsForUser.next()){
+        
+        if(counter == 1){
+            out.println("<br><p>Alerts: </p>");
+        }
+  
+        out.println("<p>You won the auction for item with item id:  " + winnerAlertsForUser.getInt("item_id") + " which has the highest bid of $" + winnerAlertsForUser.getDouble("current_bid") + ".</p><br>");
+       
+        counter++;
+    }
+    
+    
     
     %>
     <section class="user-heading">
@@ -59,6 +95,37 @@
                 <%
                 while (rsItems.next()) {
                     String id = rsItems.getString("item_id");
+                    java.util.Date currentdate = new java.util.Date();
+                    
+                    String closing_date = rsItems.getString("closing_date");
+                    String closing_time = rsItems.getString("closing_time");
+                    
+                    java.util.Date closing_date_time = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").parse(closing_date + " " + closing_time);
+                    
+                    if(currentdate.after(closing_date_time)){
+                     
+                        if(Integer.parseInt(rsItems.getString("current_bid")) >= Integer.parseInt(rsItems.getString("min_price"))){                           
+                            //Alert the winner
+                            
+                            Statement st4 = con.createStatement();
+                            Statement st5 = con.createStatement();
+                            Statement st6 = con.createStatement();
+                            
+                            ResultSet winner = st4.executeQuery("SELECT b.login_id AS login_id FROM bid b " + 
+                                                               "WHERE b.amount = " + rsItems.getDouble("current_bid") + 
+                                                               " AND b.item_id = " + rsItems.getInt("item_id") + ";");
+
+                            while(winner.next()){
+                                st5.executeUpdate("INSERT INTO winner_alerts (login_id, item_id, current_bid) VALUES('" + winner.getString("login_id") + "', " + rsItems.getInt("item_id") + ", " +
+                                                   rsItems.getDouble("current_bid") + ") ON DUPLICATE KEY UPDATE login_id = '" + winner.getString("login_id") + "';");
+                                break;
+                            }
+                            
+                            st6.executeUpdate("DELETE FROM alerts a WHERE a.login_id = '" + rsItems.getString("login_id") + 
+                                              "' AND a.item_id = " + rsItems.getInt("item_id") + ";");
+                               
+                        }
+                    }
                 %>
                 <tr>
                     <td><a href="item.jsp?item_id=<%=id%>"><%=id%></a></td>

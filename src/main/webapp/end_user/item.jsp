@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="persistence.db.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*,java.text.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +51,19 @@
     </div>
     <br />
     <form action="bidItem.jsp" method="post">
+        <%
+        java.util.Date currentdate = new java.util.Date();
+        
+        String closing_date = rsItems.getString("closing_date");
+        String closing_time = rsItems.getString("closing_time");
+        
+        java.util.Date closing_date_time = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").parse(closing_date + " " + closing_time);
+        
+        if(currentdate.after(closing_date_time)){
+            out.println("<p>This auction is closed. Please do not place a bid</p>");
+            out.println("<br><p>Return to the previous page<a href = setAuction.jsp>Auctions</a></p>");
+        }
+        %>
         Bid:<input type="text" name="bid_price" required/>
         <br>
         <input type ="hidden" id="item_id" name="item_id" value=<%=request.getParameter("item_id")%>>

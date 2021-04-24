@@ -34,24 +34,7 @@
         QuestionService questionService = new QuestionService();
         String searchQuery = request.getParameter("searchQuery");
         List<Question> questionList = questionService.filterQuestionsByKeyWord(searchQuery);
-        
-        DbConnectionManager db = new DbConnectionManager();
-        Connection con = db.getDbConnection();
-    
-        Statement st = con.createStatement();
-        ResultSet alertsForUser = st.executeQuery("SELECT * FROM alerts a " + 
-                                                   "WHERE a.login_id = '" + session.getAttribute("user") + "';");
-        
-        int counter = 1;
-
-        while(alertsForUser.next()){
-            if(counter == 1){
-                out.println("<p>Alerts: </p>");
-            }
-            out.println("<p>The item with item id " + alertsForUser.getInt("item_id") + "has a higher bid of $" + alertsForUser.getDouble("current_bid") + " which is higher than you placed.</p><br>");
-            
-            counter++;
-        }
+       
     %>
 
     <div class="container">
