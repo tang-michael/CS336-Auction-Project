@@ -46,7 +46,7 @@
         if(counter == 1){
             out.println("<br><p>Alerts: </p>");
         }
-        out.println("<p>The item with item id " + alertsForUser.getInt("item_id") + "has a higher bid of $" + alertsForUser.getDouble("current_bid") + " which is higher than you placed.</p><br>");
+        out.println("<p>The item with item id " + alertsForUser.getInt("item_id") + " has a higher bid of $" + alertsForUser.getDouble("current_bid") + " which is higher than you placed.</p><br>");
         
         counter++;
     }

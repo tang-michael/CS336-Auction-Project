@@ -36,6 +36,11 @@
             <br>
             Minimum Price (Optional) :<input type="text" name="minPrice" />
             <br>
+            <%
+            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            
+            out.println("Please enter a date and time after: " + currentTime.toString() + "<br>");
+            %>
             Closing Date (Please enter date in yyyy-mm-dd format) :<input type="text" name="closing_date" />
             <br>
             Closing Time (Please enter time in 24hr format in hh:mm:ss) :<input type="text" name="closing_time" />
