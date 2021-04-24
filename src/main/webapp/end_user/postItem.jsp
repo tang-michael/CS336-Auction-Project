@@ -34,7 +34,7 @@
             <br>
             Characteristics :<input type="text" name="characteristics" />
             <br>
-            Minimum Price :<input type="text" name="minPrice" />
+            Minimum Price (Optional) :<input type="text" name="minPrice" />
             <br>
             Closing Date (Please enter date in yyyy-mm-dd format) :<input type="text" name="closing_date" />
             <br>

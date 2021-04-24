@@ -29,7 +29,13 @@
         double init_Price = Double.parseDouble(request.getParameter("initPrice"));
         String itemName = request.getParameter("itemName");
         String characteristics = request.getParameter("characteristics");
-        double min_Price = Double.parseDouble(request.getParameter("minPrice"));
+        double min_Price;
+        if(request.getParameter("minPrice").equals("")){
+            min_Price = 0;
+        }
+        else{
+            min_Price = Double.parseDouble(request.getParameter("minPrice"));
+        }
         String closing_date = request.getParameter("closing_date");
         String closing_time = request.getParameter("closing_time");
     
