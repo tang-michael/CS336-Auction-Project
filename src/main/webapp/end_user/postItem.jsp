@@ -24,7 +24,7 @@
             <input type="radio" id="cameras" name="type" value = "cameras">
             <label for="cameras">Cameras</label>
             <br>
-            Login ID:<input type="text" name="login_id" />
+            Login ID (Please use your own login id):<input type="text" name="login_id" />
             <br>
             Brand Name:<input type="text" name="brandName" />
             <br>

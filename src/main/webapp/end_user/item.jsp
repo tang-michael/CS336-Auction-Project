@@ -19,7 +19,7 @@
         Statement stItems = null;
         ResultSet rsItems = null;
         
-        String sql = "select * from item where item_id=" + request.getParameter("item_id");
+        String sql = "select * from item where item_id = " + request.getParameter("item_id");
         System.out.println(sql);
         stItems = con.createStatement(); 
         rsItems = stItems.executeQuery(sql);
@@ -52,14 +52,14 @@
     <br />
     <form action="bidItem.jsp" method="post">
         <%
-        java.util.Date currentdate = new java.util.Date();
+        Timestamp currentdate = new Timestamp(System.currentTimeMillis());
         
         String closing_date = rsItems.getString("closing_date");
         String closing_time = rsItems.getString("closing_time");
         
-        java.util.Date closing_date_time = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").parse(closing_date + " " + closing_time);
+        Timestamp closing_date_time = new Timestamp(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(closing_date + " " + closing_time).getTime());
         
-        if(currentdate.after(closing_date_time)){
+        if(currentdate.compareTo(closing_date_time) > 0){
             out.println("<p>This auction is closed. Please do not place a bid</p>");
             out.println("<br><p>Return to the previous page<a href = setAuction.jsp>Auctions</a></p>");
         }

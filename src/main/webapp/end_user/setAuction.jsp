@@ -95,14 +95,14 @@
                 <%
                 while (rsItems.next()) {
                     String id = rsItems.getString("item_id");
-                    java.util.Date currentdate = new java.util.Date();
+                    Timestamp currentdate = new Timestamp(System.currentTimeMillis());
                     
                     String closing_date = rsItems.getString("closing_date");
                     String closing_time = rsItems.getString("closing_time");
                     
-                    java.util.Date closing_date_time = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").parse(closing_date + " " + closing_time);
+                    Timestamp closing_date_time = new Timestamp(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(closing_date + " " + closing_time).getTime());
                     
-                    if(currentdate.after(closing_date_time)){
+                    if(currentdate.compareTo(closing_date_time) > 0){
                      
                         if(Integer.parseInt(rsItems.getString("current_bid")) >= Integer.parseInt(rsItems.getString("min_price"))){                           
                             //Alert the winner
