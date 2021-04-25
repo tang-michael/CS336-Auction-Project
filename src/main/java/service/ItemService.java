@@ -4,8 +4,11 @@ import persistence.model.item.Item;
 import persistence.model.user.User;
 import persistence.repository.ItemRepository;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -27,6 +30,18 @@ public class ItemService {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+    
+    public void updateWinner(String item_id, String winner) throws SQLException {
+    	itemRepository.setWinner(item_id, winner);
+    }
+    
+    public void updateItemBid(String item_id, String bid, String upper_limit, String bid_increment, String item_increment) throws SQLException {
+    	itemRepository.updateItemBid(item_id, bid, upper_limit, bid_increment, item_increment);
+    }
+    
+    public Item getExactItem(String item_id) throws SQLException {
+          return itemRepository.getItemByID(item_id);
     }
 
     // Delete items for the given user.

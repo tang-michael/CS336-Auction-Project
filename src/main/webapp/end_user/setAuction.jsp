@@ -88,6 +88,8 @@
                     <th>Initial Price</th>
                     <th>Closing Date</th>
                     <th>Closing Time</th>
+                    <th>Regular Bid</th>
+                    <th>Auto Bid</th>
                 </tr>
             </thead>
             <tbody>
@@ -137,6 +139,8 @@
                     <td>$<%=rsItems.getString("initial_price")%></td>
                     <td><%=rsItems.getString("closing_date") %></td>
                     <td><%=rsItems.getString("closing_time") %></td>
+                    <td><a href="item.jsp?item_id=<%=id%>">Bid</a></td>
+                    <td><a href="autoBidItem.jsp?item_id=<%=id%>">Auto Bid</a></td>
                 </tr>
                 <%
                 }
