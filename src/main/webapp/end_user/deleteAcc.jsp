@@ -31,7 +31,7 @@
         
         st.executeUpdate("DELETE FROM sellers s WHERE s.login_id = '" + (String)session.getAttribute("user") + "';");
         
-        st1.executeUpdate("DELETE FROM buyers b WHERE b.login_id = '" + (String)session.getAttribute("user") + "';");
+        st1.executeUpdate("DELETE FROM buyer b WHERE b.login_id = '" + (String)session.getAttribute("user") + "';");
         
         st2.executeUpdate("DELETE FROM bid b WHERE b.login_id = '" + (String)session.getAttribute("user") + "';");
         
@@ -43,14 +43,14 @@
         
         st6.executeUpdate("DELETE FROM users u WHERE u.login_id = '" + (String)session.getAttribute("user") + "';");
         
-        response.sendRedirect("${pageContext.request.contextPath}/logout");    
+        response.sendRedirect("successDelete.jsp");   
                 
         //Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
         con.close();
     }
     catch(Exception e){
         e.printStackTrace();
-        out.println("Unable to add the item.");
+        out.println("Unable to delete the user account.");
     }
     %>
 </body>
