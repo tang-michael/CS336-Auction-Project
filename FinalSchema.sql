@@ -76,6 +76,8 @@ CREATE TABLE item
   min_price float NOT NULL,
   closing_date date,
   closing_time time,
+  user_increment float,
+  upper_limit float,
   primary key (item_id),
   foreign key(login_id) references users(login_id)
   );
