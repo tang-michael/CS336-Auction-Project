@@ -61,12 +61,6 @@
             <br />
             <br />
             <b>Initial Price: </b> $<%=item.getInitialPrice() %> 
-            <br />
-            <br />
-            <b>Upper Limit: </b> $<%=item.getUpper_limit() %>  
-            <br />
-            <br />
-            <b>User Increment: </b> $<%=item.getUser_increment() %>  
         </div>
         
     

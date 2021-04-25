@@ -51,6 +51,7 @@ public class AutoBidServlet extends HttpServlet {
             if (upper_limit.length() == 0) {
                 // Bid is greater than upper limit with no upper limit
                 if (item.getUpper_limit() < Double.parseDouble(bid)) {
+                	System.out.println("test");
                     double total = Double.parseDouble(bid) + item.getUser_increment();
                     itemService.updateItemBid(item_id,String.valueOf(total), String.valueOf(0), String.valueOf(item.getUser_increment()),
                             String.valueOf(item.getItem_increment()));
@@ -60,12 +61,14 @@ public class AutoBidServlet extends HttpServlet {
                 }
                 // Bid is less than upper limit with no upper limit
                 else if (item.getUpper_limit() > Double.parseDouble(bid)) {
+                	System.out.println("test1");
                     double total = Double.parseDouble(bid) + item.getUser_increment();
                     itemService.updateItemBid(item_id, String.valueOf(total), String.valueOf(0), String.valueOf(item.getUpper_limit()),
                             String.valueOf(item.getItem_increment()));
-                    resp.sendRedirect(req.getContextPath() + "/end_user/autoBidItem.jsp?item_id=" + item_id);
+                    resp.sendRedirect(req.getContextPath() + "/end_user/autoBidItem.jsp?item_id=" + item_id + "&error=You have been outbid by an autobid");
                     return;
                 }else if(item.getUpper_limit() == Double.parseDouble(bid)) {
+                	System.out.println("test2");
                     double total = Double.parseDouble(bid) + item.getUser_increment();
                     itemService.updateItemBid(item_id,String.valueOf(total), String.valueOf(0), String.valueOf(item.getUser_increment()),
                             String.valueOf(item.getItem_increment()));  
@@ -87,12 +90,14 @@ public class AutoBidServlet extends HttpServlet {
 //                    itemService.updateWinner(item_id, user.getLoginId());
                     return;
                 } else if (item.getUpper_limit() > Double.parseDouble(upper_limit)) {
-                    itemService.updateItemBid(item_id, upper_limit + String.valueOf(item.getUser_increment()), String.valueOf(item.getUpper_limit()),
+                	 double total = Double.parseDouble(bid) + item.getUser_increment();
+                    itemService.updateItemBid(item_id, String.valueOf(total), String.valueOf(item.getUpper_limit()),
                             String.valueOf(item.getUser_increment()), String.valueOf(item.getItem_increment()));
                     resp.sendRedirect(req.getContextPath() + "/end_user/autoBidItem.jsp?item_id=" + item_id);
                     return;
                 } else if (item.getUpper_limit() < Double.parseDouble(upper_limit)) {
-                    itemService.updateItemBid(item_id, bid + item.getUser_increment(), upper_limit, bid_increment, String.valueOf(item.getItem_increment()));
+                	 double total = Double.parseDouble(bid) + item.getUser_increment();
+                    itemService.updateItemBid(item_id,  String.valueOf(total), upper_limit, bid_increment, String.valueOf(item.getItem_increment()));
                     resp.sendRedirect(req.getContextPath() + "/end_user/autoBidItem.jsp?item_id=" + item_id);
 //                    itemService.updateWinner(item_id, user.getLoginId());
                     return;

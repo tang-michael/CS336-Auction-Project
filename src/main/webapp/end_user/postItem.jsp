@@ -2,6 +2,14 @@
     pageEncoding="ISO-8859-1" import="persistence.db.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="persistence.model.Question" %>
+<%@ page import="service.QuestionService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="controller.AttributeKeys" %>
+<%@ page import="persistence.model.user.User" %>
+<%@ page import="persistence.db.*"%>
+<%@ page import="java.io.*,java.util.*,java.text.SimpleDateFormat,java.util.Date,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -92,6 +100,19 @@
     
     </script>
     <body>
+    	<div class="navbar">
+        <%
+            User user = (User) request.getSession().getAttribute(AttributeKeys.AUTHENTICATED_USER);
+        %>
+        <h2 class="navbar-brand">Online Auction System | <%=  user.getFullName() %></h2>
+        <div class="nav-links right-nav-links">
+            <a href="setAuction.jsp">View Auctions and Bid Items</a>
+            <a class="active-link" href="index.jsp">Questions</a>
+            <a href="ask_question.jsp">Post Question</a>
+            <a href="deleteAcc.jsp">Delete Account</a>
+            <a href="${pageContext.request.contextPath}/logout">Logout</a>
+        </div>
+    </div>
         
         <form action="setItem.jsp" method="post">
             <input type="radio" onclick="javascript:selectCharacteristics();" id="computerAccessories" name="type" value = "Computer Accessories">

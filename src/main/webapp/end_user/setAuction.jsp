@@ -2,6 +2,14 @@
     pageEncoding="ISO-8859-1" import="persistence.db.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*,java.util.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*,java.text.*"%>
+<%@ page import="persistence.model.Question" %>
+<%@ page import="service.QuestionService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="controller.AttributeKeys" %>
+<%@ page import="persistence.model.user.User" %>
+<%@ page import="persistence.db.*"%>
+<%@ page import="java.io.*,java.util.*,java.text.SimpleDateFormat,java.util.Date,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +19,19 @@
 <title>Auctions</title>
 </head>
 <body>
+	<div class="navbar">
+        <%
+            User user = (User) request.getSession().getAttribute(AttributeKeys.AUTHENTICATED_USER);
+        %>
+        <h2 class="navbar-brand">Online Auction System | <%=  user.getFullName() %></h2>
+        <div class="nav-links right-nav-links">
+            <a href="setAuction.jsp">View Auctions and Bid Items</a>
+            <a class="active-link" href="index.jsp">Questions</a>
+            <a href="ask_question.jsp">Post Question</a>
+            <a href="deleteAcc.jsp">Delete Account</a>
+            <a href="${pageContext.request.contextPath}/logout">Logout</a>
+        </div>
+    </div>
 
     <%
     
