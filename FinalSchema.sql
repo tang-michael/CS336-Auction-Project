@@ -317,42 +317,42 @@ INSERT INTO buyer VALUES ('', 'michael'), ('', 'maharshi'), ('', 'camila'), ('',
 INSERT INTO admins VALUES ('2021-03-23', 'Admin_01');
 INSERT INTO customer_representatives VALUES ('2021-03-23', 'Customer_Support');
 
-INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (2, 'francis', 110, 4);
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (2, 'camila', 110, 4);
 INSERT INTO has_item (item_id, bid_id) VALUES (4, 2);
-INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 2, 110, 20);
-INSERT INTO legal_bid (bid_id, login_id) VALUES (2, 'francis');
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('camila', 2, 110, 20);
+INSERT INTO legal_bid (bid_id, login_id) VALUES (2, 'camila');
 
 INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (3, 'francis', 174, 10);
 INSERT INTO has_item (item_id, bid_id) VALUES (10, 3);
 INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 3, 174, 10);
 INSERT INTO legal_bid (bid_id, login_id) VALUES (3, 'francis');
 
-INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (4, 'maharshi', 200, 8);
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (4, 'camila', 200, 8);
 INSERT INTO has_item (item_id, bid_id) VALUES (8, 4);
-INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('maharshi', 4, 200, 15);
-INSERT INTO legal_bid (bid_id, login_id) VALUES (4, 'maharshi');
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('camila', 4, 200, 15);
+INSERT INTO legal_bid (bid_id, login_id) VALUES (4, 'camila');
 
-INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (5, 'francis', 6, 13);
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (5, 'maharshi', 6, 13);
 INSERT INTO has_item (item_id, bid_id) VALUES (13, 5);
-INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 5, 6, 1);
-INSERT INTO illegal_bid (bid_id, login_id) VALUES (5, 'francis');
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('maharshi', 5, 6, 1);
+INSERT INTO illegal_bid (bid_id, login_id) VALUES (5, 'maharshi');
 
 
-INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (6, 'francis', 100, 7);
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (6, 'michael', 100, 7);
 INSERT INTO has_item (item_id, bid_id) VALUES (7, 6);
-INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 6, 100, 5);
-INSERT INTO illegal_bid (bid_id, login_id) VALUES (6, 'francis');
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('michael', 6, 100, 5);
+INSERT INTO illegal_bid (bid_id, login_id) VALUES (6, 'michael');
 
-INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (7, 'camila', 50, 2);
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (7, 'francis', 50, 2);
 INSERT INTO has_item (item_id, bid_id) VALUES (2, 7);
-INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('camila', 7, 50, 0);
-INSERT INTO illegal_bid (bid_id, login_id) VALUES (7, 'camila');
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 7, 50, 0);
+INSERT INTO illegal_bid (bid_id, login_id) VALUES (7, 'francis');
 
 
 INSERT INTO sells(item_id, login_id, close_date_time) VALUES
-                    (4, 'michael', '2021-02-01 08:30:00'),
-                    (10, 'camila', '2021-02-01 08:30:00'),
-                    (8, 'francis', '2021-02-01 08:30:00');
+                    (4, 'camila', '2021-02-01 08:30:00'),
+                    (10, 'francis', '2021-02-01 08:30:00'),
+                    (8, 'camila', '2021-02-01 08:30:00');
                     
 INSERT INTO question VALUES (1, 'Why is Mars called a Red Planet', 'annonymous', '2021-04-21'),
   (2, 'Why does my auction item get the lowest prices? ', 'annonymous', '2021-04-21'),
@@ -412,5 +412,13 @@ INSERT INTO answer VALUES (1, 'Because, the surface is full of red stuff.', 1, '
 -- SELECT * FROM buyer;
 
 -- SELECT * FROM bid;
+
+-- SELECT * FROM illegal_bid;
+
+-- SELECT * FROM legal_bid;
+
+-- SELECT * FROM bids;
+
+-- SELECT * FROM has_item;
 
 -- SELECT * FROM answer;
