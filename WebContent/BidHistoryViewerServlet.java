@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintStream;
+import java.io.PrintWriter;
 
 import persistence.repository.BidRepository;
 
@@ -23,11 +23,12 @@ public class BidHistoryViewerServlet extends HttpServlet {
 	{
 		String loginID = req.getParameter("loginId");
 		List<Bid> history = bidRepo.findAllBids();
+		PrintWriter pw = request.getWriter();
 	
 		for (Bid b : history)
 		{
 			if (b.getUser().getloginId() == loginID)
-				System.out.println(b.getBidId() + ", " + b.getItem().getItemId() + ", " + b.getItem().getBrand());
+				pw.println(b.getBidId() + ", " + b.getItem().getItemId() + ", " + b.getItem().getBrand());
 		}
 		
 	}
