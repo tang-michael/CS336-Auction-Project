@@ -13,19 +13,20 @@ CREATE TABLE users
   
   
 CREATE TABLE auctions
-( auction_id int NOT NULL,
+( auction_id int NOT NULL AUTO_INCREMENT,
+  closing_date date,
+  closing_time time,
   history_of_bids varchar(100),
   primary key(auction_id ));
   
 
 CREATE TABLE end_user
-  ( email varchar(200) NOT NULL,
+  ( email varchar(20) NOT NULL,
    login_id varchar(50) NOT NULL,
   primary key (login_id),
   foreign key(login_id) references users(login_id)
   );
   
-
 
 
 CREATE TABLE buyer
@@ -44,6 +45,8 @@ CREATE TABLE sellers
 CREATE TABLE bid
   (bid_id int NOT NULL,
   login_id varchar(50) NOT NULL,
+  amount float NOT NULL,
+  item_id int NOT NULL,
   primary key (bid_id),
   foreign key(login_id) references users(login_id)
   );
@@ -269,6 +272,13 @@ VALUES	('maharshi', 'patel', 'maharshi', 'patel'),
         ('camila', 'mata', 'camila', 'mata'),
         ('John', 'Smith', 'Admin_01', 'root'),
         ('Sam', 'Christian', 'Customer_Support', 'root');
+        
+        
+INSERT INTO end_user
+VALUES ('maharshi@abcd.com', 'maharshi');    
+
+INSERT INTO end_user
+VALUES ('francis@abcd.com', 'francis');    
       
 
 INSERT INTO admins 
@@ -277,9 +287,8 @@ VALUES ('2021-03-23', 'Admin_01');
 INSERT INTO customer_representatives
 VALUES ('2021-03-23', 'Customer_Support');
 
-INSERT INTO end_user
-VALUES('tangmichael4502@gmail.com', 'michael');
-  
+INSERT INTO item
+VALUES (1, 1,'maharshi', 'Computer', 'Apple', 0, 10000, 5000, 'Intel Core i5');
 
 -- DROP TABLE item;
 -- DROP TABLE computer_accessories;
@@ -288,13 +297,30 @@ VALUES('tangmichael4502@gmail.com', 'michael');
 -- DROP TABLE cameras;
 -- DROP TABLE sells;
 -- DROP TABLE has_item;
---         
+-- DROP TABLE auctions;
+-- DROP TABLE views;
+-- DROP TABLE bid;
+-- DROP TABLE auto_bids;
+-- DROP TABLE bids;
+-- DROP TABLE removes;
+-- DROP TABLE has_item
+-- DROP TABLE alerts;
+-- DROP TABLE winner_alerts;
 -- SELECT * FROM admins;
 
 -- SELECT * FROM users; 
 
 -- SELECT * FROM item;
 
+-- SELECT * FROM computer_accessories;
+
 -- SELECT * FROM computers;
 
---   
+-- SELECT * FROM auctions;
+
+-- SELECT * FROM alerts;
+
+-- SELECT * FROM winner_alerts; 
+
+-- 
+
