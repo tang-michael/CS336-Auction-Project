@@ -10,15 +10,6 @@ CREATE TABLE users
   login_id varchar(50) NOT NULL,
   pwd varchar(20) NOT NULL,
   primary key(login_id));
-  
-  
-CREATE TABLE auctions
-( auction_id int NOT NULL AUTO_INCREMENT,
-  closing_date date,
-  closing_time time,
-  history_of_bids varchar(100),
-  primary key(auction_id ));
-  
 
 CREATE TABLE end_user
   ( email varchar(20) NOT NULL,
@@ -27,7 +18,10 @@ CREATE TABLE end_user
   foreign key(login_id) references users(login_id)
   );
   
-
+  CREATE TABLE auctions
+( auction_id int NOT NULL,
+  history_of_bids varchar(100),
+  primary key(auction_id ));
 
 CREATE TABLE buyer
   (alerts varchar(50),
@@ -35,7 +29,8 @@ CREATE TABLE buyer
   primary key (login_id),
   foreign key(login_id) references users(login_id)
   );
-  
+
+
 CREATE TABLE sellers
   (login_id varchar(50) NOT NULL,
   primary key (login_id),
@@ -50,24 +45,11 @@ CREATE TABLE bid
   primary key (bid_id),
   foreign key(login_id) references users(login_id)
   );
-   
-CREATE TABLE legal_bid
-  (bid_id int NOT NULL,
-  login_id varchar(50) NOT NULL,
-  primary key (bid_id),
-  foreign key(login_id) references users(login_id)
-  );
-   
-CREATE TABLE illegal_bid
-  (bid_id int NOT NULL,
-  login_id varchar(50) NOT NULL,
-  primary key (bid_id),
-  foreign key(login_id) references users(login_id)
-  );
   
 CREATE TABLE item
   (item_id int NOT NULL AUTO_INCREMENT,
   login_id varchar(50) NOT NULL,
+  item_name varchar(200),
   item_type varchar(200),
   brand varchar(25),
   current_bid float NOT NULL,
@@ -148,77 +130,6 @@ CREATE TABLE summary_sales_report
   primary key (login_id),
   foreign key(login_id) references users(login_id)
   );
-   
-CREATE TABLE views
-  (login_id varchar(50) NOT NULL,
-  auction_id int NOT NULL,
-  primary key (login_id,auction_id),
-  foreign key(login_id) references users(login_id),
-  foreign key(auction_id) references auctions(auction_id)
-  );
-   
-CREATE TABLE support
-  (end_user_login_id varchar(50) NOT NULL,
-  customer_representatives_login_id varchar(50) NOT NULL,
-  primary key (end_user_login_id,customer_representatives_login_id),
-  foreign key(end_user_login_id) references end_user(login_id),
-  foreign key(customer_representatives_login_id) references customer_representatives(login_id)
-  );
-   
-CREATE TABLE manages
-  (customer_representatives_login_id varchar(50) NOT NULL,
-  admins_login_id varchar(50) NOT NULL,
-  primary key (customer_representatives_login_id,admins_login_id),
-  foreign key(customer_representatives_login_id) references customer_representatives(login_id),
-  foreign key(admins_login_id) references admins(login_id)
-  );
- 
-CREATE TABLE auto_bids
-  (login_id varchar(50) NOT NULL,
-  bid_id int NOT NULL,
-  upper_limit int,
-  increment int,
-  primary key (login_id,bid_id),
-  foreign key(login_id) references buyer(login_id),
-  foreign key(bid_id) references bid(bid_id)
-  );
-  
-CREATE TABLE bids
-  (login_id varchar(50) NOT NULL,
-  bid_id int NOT NULL,
-  bid_offer int,
-  increment int,
-  primary key (login_id,bid_id),
-  foreign key(login_id) references buyer(login_id),
-  foreign key(bid_id) references bid(bid_id)
-  );
-    
-CREATE TABLE has_item
-  (item_id int NOT NULL,
-  bid_id int NOT NULL,
-  primary key (bid_id),
-  foreign key(item_id) references item(item_id),
-  foreign key(bid_id) references bid(bid_id)
-  );
-   
-CREATE TABLE sells
-  (item_id int NOT NULL,
-  login_id varchar(50) NOT NULL,
-  close_date_time datetime,
-  primary key (item_id),
-  foreign key(item_id) references item(item_id),
-  foreign key(login_id) references sellers(login_id)
-  );
- 
-CREATE TABLE removes
-  (bid_bid_id int NOT NULL,
-  illegal_bid_bid_id int NOT NULL,
-  customer_representatives_login_id varchar(50) NOT NULL,
-  primary key (bid_bid_id, illegal_bid_bid_id, customer_representatives_login_id),
-  foreign key(bid_bid_id) references bid(bid_id),
-  foreign key(illegal_bid_bid_id) references illegal_bid(bid_id),
-  foreign key(customer_representatives_login_id) references customer_representatives(login_id)
-  );
   
   CREATE TABLE alerts
 ( login_id varchar(50) NOT NULL,
@@ -247,7 +158,6 @@ CREATE TABLE removes
     foreign key (login_id) references end_user(login_id)
 );
 
-
 CREATE TABLE answer (
     answer_id INT(100) AUTO_INCREMENT,
     answer VARCHAR(255),
@@ -267,20 +177,86 @@ CREATE TABLE sales_reports (
     primary key (sales_report_id)
 );
 
+CREATE TABLE legal_bid
+  (bid_id int NOT NULL,
+  login_id varchar(50) NOT NULL,
+  primary key (bid_id),
+  foreign key(login_id) references users(login_id)
+  );
+   
+CREATE TABLE illegal_bid
+  (bid_id int NOT NULL,
+  login_id varchar(50) NOT NULL,
+  primary key (bid_id),
+  foreign key(login_id) references users(login_id)
+  );
+  
+  CREATE TABLE has_item
+  (item_id int NOT NULL,
+  bid_id int NOT NULL,
+  primary key (bid_id),
+  foreign key(item_id) references item(item_id),
+  foreign key(bid_id) references bid(bid_id)
+  );
+   
+CREATE TABLE sells
+  (item_id int NOT NULL,
+  login_id varchar(50) NOT NULL,
+  close_date_time datetime,
+  primary key (item_id),
+  foreign key(item_id) references item(item_id),
+  foreign key(login_id) references sellers(login_id)
+  );
+  
+  CREATE TABLE auto_bids
+  (login_id varchar(50) NOT NULL,
+  bid_id int NOT NULL,
+  upper_limit int,
+  increment int,
+  primary key (login_id,bid_id),
+  foreign key(login_id) references buyer(login_id),
+  foreign key(bid_id) references bid(bid_id)
+  );
+  
+CREATE TABLE bids
+  (login_id varchar(50) NOT NULL,
+  bid_id int NOT NULL,
+  bid_offer int,
+  increment int,
+  primary key (login_id,bid_id),
+  foreign key(login_id) references buyer(login_id),
+  foreign key(bid_id) references bid(bid_id)
+  );
+
 INSERT INTO users
-VALUES	('maharshi', 'patel', 'maharshi', 'patel'),
-		('michael', 'tang', 'michael', 'tang'),
+VALUES  ('maharshi', 'patel', 'maharshi', 'patel'),
+        ('michael', 'tang', 'michael', 'tang'),
         ('francis', 'adu', 'francis', 'adu'),
         ('camila', 'mata', 'camila', 'mata'),
         ('John', 'Smith', 'Admin_01', 'root'),
         ('Sam', 'Christian', 'Customer_Support', 'root');
+        
+INSERT INTO users
+VALUES  ('Sam', 'Christian', 'Customer_Support', 'root');
         
         
 INSERT INTO end_user
 VALUES ('maharshi@abcd.com', 'maharshi');    
 
 INSERT INTO end_user
-VALUES ('francis@abcd.com', 'francis');    
+VALUES ('francis@abcd.com', 'francis');
+
+INSERT INTO end_user
+VALUES ('michael@abcd.com', 'michael');    
+
+INSERT INTO end_user
+VALUES ('camila@abcd.com', 'camila');
+
+INSERT INTO end_user
+VALUES ('annon@abcd.com', 'annonymous');
+
+INSERT INTO users
+VALUES ('annonymous', 'annonymous', 'annonymous', 'annonymous');
       
 
 INSERT INTO admins 
@@ -289,26 +265,106 @@ VALUES ('2021-03-23', 'Admin_01');
 INSERT INTO customer_representatives
 VALUES ('2021-03-23', 'Customer_Support');
 
-INSERT INTO item
-VALUES (1, 1,'maharshi', 'Computer', 'Apple', 0, 10000, 5000, 'Intel Core i5');
-					 
-INSERT INTO `item` (`item_id`, `login_id`, `item_type`, `brand`, `closing_date`, `closing_time`, `current_bid`, `initial_price`, `min_price`, `bid_increment`, `upper_limit`)
- VALUES (1, 'michael', 'iphone X', 'Apple', '2021-02-01','08:30:00', 857.99, 654.23, 223, 50, 0),
-        (2, 'maharshi', 'iPad Mini', 'Apple', '2021-02-01','08:30:00', 423.99, 321.99, 110.99, 50, 0),
-        (3, 'camila', 'Macbook Pro 2021', 'Apple', '2021-02-01','08:30:00', 1023.99, 821.99, 710.99, 20, 0),
-        (4, 'michael', 'Razer Keyboard', 'Razer', '2021-02-01','08:30:00', 89.99, 54.99, 34.99, 50, 0),
-        (5, 'michael', 'Bluesnowball Microphone', 'Bluesnowball', '2021-02-01','08:30:00', 54.99, 43.99, 40.99,  50, 0),
-        (6, 'maharshi', 'Apple Airpods', 'Apple', '2021-02-01','08:30:00', 69.99, 59.99, 55.99, 50, 0),
-        (7, 'camila', 'HP Spectre Laptop', 'HP', '2021-02-01','08:30:00', 1022.99, 812.99, 712.99,50, 0),
-        (8, 'francis', 'Samsung 27" Monitor', 'Samsung', '2021-02-01','08:30:00', 219.99, 210.99, 199.99, 50, 0),
-        (9, 'maharshi', 'College Rule Notebook', 'College Rule', '2021-02-01','08:30:00', 9.99, 8.99, 7.99,50, 0),
-        (10, 'camila', 'HP Officejet Pro 8620', 'HP', '2021-02-01','08:30:00', 213.99, 199.99, 154.99, 50, 0),
-        (11, 'francis', 'Reddragon Lite Mouse', 'Apple', '2021-02-01','08:30:00', 423.99, 321.99, 110.99, 50, 0),
-        (12, 'camila', 'Cyberpower PC Desktop', 'Cyberpower', '2021-02-01','08:30:00', 1299.99, 1019.99, 999.99, 50,0),
-        (13, 'michael', 'Nike Sneakers', 'Nike', '2021-02-01','08:30:00', 129.99, 99.99, 89.99, 50, 0),
-        (14, 'maharshi', 'Addidas Sneakers', 'Addidas', '2021-02-01','08:30:00', 199.99, 159.99, 129.99, 50, 0),
-        (15, 'camila', 'iMac 2020', 'Apple', '2021-02-01','08:30:00', 2099.99, 1999.99, 1499.99, 50, 0);
+INSERT INTO item (item_id, login_id, item_name,item_type, brand, initial_price, current_bid, bid_increment, min_price, closing_date, closing_time, user_increment, upper_limit)
+VALUES (1, 'maharshi', 'Macbook Pro','Computers', 'Apple', 10000, 0, 100, 5000, '2021-05-25', '11:59:00', 0, 0),
+       (2, 'francis', 'Macbook Pro', 'Computers', 'Apple', 10000, 0, 100, 5000, '2021-05-25', '11:59:00', 0, 0),
+       (3, 'michael', 'Macbook Pro', 'Computers', 'Apple', 10000, 0, 100, 5000, '2021-05-25', '11:59:00', 0, 0),
+       (4, 'camila', 'Macbook Pro', 'Computers', 'Apple', 10000, 0, 100, 5000, '2021-05-25', '11:59:00', 0, 0),
+       (5, 'maharshi', 'Keyboard', 'Computer Accessories', 'Dell', 100, 0, 100, 50, '2021-05-25', '11:59:00', 0, 0),
+       (6, 'francis', 'Mouse', 'Computer Accessories', 'Dell', 100, 0, 100, 50, '2021-05-25', '11:59:00', 0, 0),
+       (7, 'michael', 'Mouse', 'Computer Accessories', 'Dell', 100, 0, 100, 50, '2021-05-25', '11:59:00', 0, 0),
+       (8, 'camila', 'Keyboard', 'Computer Accessories', 'Dell', 100, 0, 100, 50, '2021-05-25', '11:59:00', 0, 0),
+       (9, 'maharshi', 'Iphone 12', 'Phones', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (10, 'francis', 'Iphone 11', 'Phones', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (11, 'michael', 'Iphone 12', 'Phones', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (12, 'camila', 'Iphone 11', 'Phones', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (13, 'maharshi', 'EOS 12', 'Cameras', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (14, 'francis', 'EOS 11', 'Cameras', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (15, 'michael', 'EOS 12', 'Cameras', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (16, 'camila', 'EOS 11', 'Cameras', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0);
+       
+INSERT INTO computers (item_id, screen_size, processor, ram)
+VALUES (1, '15.6 inches', 'Intel Core i5', '8 GB RAM'),
+       (2, '13 inches', 'Intel Core i5', '8 GB RAM'),
+       (3, '14 inches', 'Intel Core i5', '8 GB RAM'),
+       (4, '15.6 inches', 'Intel Core i5', '12 GB RAM');
+       
+INSERT INTO computer_accessories (item_id, connectivity, color, battery)
+VALUES (5, 'Wired', 'Grey', 'AA Batteries Required'),
+       (6, 'Wireless', 'Grey', 'AA Batteries Required'),
+       (7, 'Wired', 'Black', 'AA Batteries Required'),
+       (8, 'Wired', 'Grey', 'Chargable');
+       
+INSERT INTO phones (item_id, wireless_connectivity, storage_size, camera_features)
+VALUES (9, '5G', '128 GB', 'Telephoto Camera'),
+       (10, '4G', '128 GB', 'Telephoto Camera'),
+       (11, '5G', '128 GB', 'Telephoto Camera'),
+       (12, '4G', '128 GB', 'Ultra Wide Camera');
+       
+INSERT INTO cameras (item_id, pixels, zoom, lenses)
+VALUES (13, '64 Mega Pixel', '40X Zoom', '25 mm Lense'),
+       (14, '32 Mega Pixel', '20X Zoom', '25 mm Lense'),
+       (15, '64 Mega Pixel', '40X Zoom', '35 mm Lense'),
+       (16, '64 Mega Pixel', '40X Zoom', '50 mm Lense');
+       
+INSERT INTO auctions (auction_id, history_of_bids) VALUES (1, 'Test History 1'),
+                                                          (2, 'Test History 2'),
+                                                          (3, 'Test History 3'),
+                                                          (4, 'Test History 4');
+                                                          
+INSERT INTO sellers VALUES ('michael'), ('maharshi'), ('camila'), ('francis');
+INSERT INTO buyer VALUES ('', 'michael'), ('', 'maharshi'), ('', 'camila'), ('', 'francis');
+INSERT INTO admins VALUES ('2021-03-23', 'Admin_01');
+INSERT INTO customer_representatives VALUES ('2021-03-23', 'Customer_Support');
 
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (2, 'camila', 110, 4);
+INSERT INTO has_item (item_id, bid_id) VALUES (4, 2);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('camila', 2, 110, 20);
+INSERT INTO legal_bid (bid_id, login_id) VALUES (2, 'camila');
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (3, 'francis', 174, 10);
+INSERT INTO has_item (item_id, bid_id) VALUES (10, 3);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 3, 174, 10);
+INSERT INTO legal_bid (bid_id, login_id) VALUES (3, 'francis');
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (4, 'camila', 200, 8);
+INSERT INTO has_item (item_id, bid_id) VALUES (8, 4);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('camila', 4, 200, 15);
+INSERT INTO legal_bid (bid_id, login_id) VALUES (4, 'camila');
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (5, 'maharshi', 6, 13);
+INSERT INTO has_item (item_id, bid_id) VALUES (13, 5);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('maharshi', 5, 6, 1);
+INSERT INTO illegal_bid (bid_id, login_id) VALUES (5, 'maharshi');
+
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (6, 'michael', 100, 7);
+INSERT INTO has_item (item_id, bid_id) VALUES (7, 6);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('michael', 6, 100, 5);
+INSERT INTO illegal_bid (bid_id, login_id) VALUES (6, 'michael');
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (7, 'francis', 50, 2);
+INSERT INTO has_item (item_id, bid_id) VALUES (2, 7);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 7, 50, 0);
+INSERT INTO illegal_bid (bid_id, login_id) VALUES (7, 'francis');
+
+
+INSERT INTO sells(item_id, login_id, close_date_time) VALUES
+                    (4, 'camila', '2021-02-01 08:30:00'),
+                    (10, 'francis', '2021-02-01 08:30:00'),
+                    (8, 'camila', '2021-02-01 08:30:00');
+                    
+INSERT INTO question VALUES (1, 'Why is Mars called a Red Planet', 'annonymous', '2021-04-21'),
+  (2, 'Why does my auction item get the lowest prices? ', 'annonymous', '2021-04-21'),
+  (3, 'It says I won the auction; however it is not letting me complete my order, why?', 'annonymous', '2021-04-21'),
+  (4, 'I don\'t know how much my item is worth, can anyone help?', 'annonymous', '2021-04-22');
+
+INSERT INTO answer VALUES (1, 'Because, the surface is full of red stuff.', 1, 'Customer_Support', '2021-04-21'),
+  (2, 'This is my second answer to the red planet query. As a customer rep, I am going to ask Elon himself. :-)', 1, 'Customer_Support', '2021-04-21'),
+  (3, 'My turn to answer the Mars question! \r\nSo here is the thing:-\r\n\r\nMars is *hotter* than the sun, that\'s why it is called the red planet.\r\nIt is also close to Pluto.', 1, 'Customer_Support', '2021-04-21'),
+  (4, 'It could be because the item is not in well condition and not attracting customers', 2, 'Customer_Support', '2021-04-22');
+
+       
 
 -- DROP TABLE item;
 -- DROP TABLE computer_accessories;
@@ -326,9 +382,18 @@ INSERT INTO `item` (`item_id`, `login_id`, `item_type`, `brand`, `closing_date`,
 -- DROP TABLE has_item
 -- DROP TABLE alerts;
 -- DROP TABLE winner_alerts;
+-- DROP TABLE auctions;
+-- DROP TABLE manages;
+-- DROP TABLE views;
+-- DROP TABLE support;
+-- DROP TABLE legal_bid;
+-- DROP TABLE illegal_bid;
+
 -- SELECT * FROM admins;
 
 -- SELECT * FROM users; 
+
+-- SELECT * FROM end_user;
 
 -- SELECT * FROM item;
 
@@ -342,5 +407,18 @@ INSERT INTO `item` (`item_id`, `login_id`, `item_type`, `brand`, `closing_date`,
 
 -- SELECT * FROM winner_alerts; 
 
--- 
+-- SELECT * FROM sellers;
 
+-- SELECT * FROM buyer;
+
+-- SELECT * FROM bid;
+
+-- SELECT * FROM illegal_bid;
+
+-- SELECT * FROM legal_bid;
+
+-- SELECT * FROM bids;
+
+-- SELECT * FROM has_item;
+
+-- SELECT * FROM answer;

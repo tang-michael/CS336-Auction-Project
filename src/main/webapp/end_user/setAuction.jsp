@@ -152,7 +152,7 @@
                     }
                 %>
                 <tr>
-                    <td><a href="item.jsp?item_id=<%=id%>"><%=id%></a></td>
+                    <td><%=id%></td>
                     <td><%=rsItems.getString("login_id")%></td>
                     <td>$<%=rsItems.getString("current_bid")%></td>
                     <td><%=rsItems.getString("item_type")%></td>

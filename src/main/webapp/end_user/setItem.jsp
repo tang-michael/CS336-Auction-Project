@@ -51,7 +51,7 @@
             itemNumber = 1;
         }
         
-        st.executeUpdate("INSERT INTO item VALUES(" + itemNumber + ", '" + loginID + "', '" + itemType + "', '"+ brandName + "', " + 0 + ", " + 
+        st.executeUpdate("INSERT INTO item VALUES(" + itemNumber + ", '" + loginID + "', '" + "', '" + itemName + "', '" + itemType + "', '"+ brandName + "', " + 0 + ", " + 
                                                       init_Price + ", " + bid_increment + ", " + min_Price + ", '" + closing_date + "', '" + closing_time + "');");
         
         if(itemType.equals("Computer Accessories")){
