@@ -10,15 +10,6 @@ CREATE TABLE users
   login_id varchar(50) NOT NULL,
   pwd varchar(20) NOT NULL,
   primary key(login_id));
-  
-  
-CREATE TABLE auctions
-( auction_id int NOT NULL AUTO_INCREMENT,
-  closing_date date,
-  closing_time time,
-  history_of_bids varchar(100),
-  primary key(auction_id ));
-  
 
 CREATE TABLE end_user
   ( email varchar(20) NOT NULL,
@@ -26,8 +17,6 @@ CREATE TABLE end_user
   primary key (login_id),
   foreign key(login_id) references users(login_id)
   );
-  
-
 
 CREATE TABLE buyer
   (alerts varchar(50),
@@ -35,7 +24,8 @@ CREATE TABLE buyer
   primary key (login_id),
   foreign key(login_id) references users(login_id)
   );
-  
+
+
 CREATE TABLE sellers
   (login_id varchar(50) NOT NULL,
   primary key (login_id),
@@ -47,20 +37,6 @@ CREATE TABLE bid
   login_id varchar(50) NOT NULL,
   amount float NOT NULL,
   item_id int NOT NULL,
-  primary key (bid_id),
-  foreign key(login_id) references users(login_id)
-  );
-   
-CREATE TABLE legal_bid
-  (bid_id int NOT NULL,
-  login_id varchar(50) NOT NULL,
-  primary key (bid_id),
-  foreign key(login_id) references users(login_id)
-  );
-   
-CREATE TABLE illegal_bid
-  (bid_id int NOT NULL,
-  login_id varchar(50) NOT NULL,
   primary key (bid_id),
   foreign key(login_id) references users(login_id)
   );
@@ -149,77 +125,6 @@ CREATE TABLE summary_sales_report
   primary key (login_id),
   foreign key(login_id) references users(login_id)
   );
-   
-CREATE TABLE views
-  (login_id varchar(50) NOT NULL,
-  auction_id int NOT NULL,
-  primary key (login_id,auction_id),
-  foreign key(login_id) references users(login_id),
-  foreign key(auction_id) references auctions(auction_id)
-  );
-   
-CREATE TABLE support
-  (end_user_login_id varchar(50) NOT NULL,
-  customer_representatives_login_id varchar(50) NOT NULL,
-  primary key (end_user_login_id,customer_representatives_login_id),
-  foreign key(end_user_login_id) references end_user(login_id),
-  foreign key(customer_representatives_login_id) references customer_representatives(login_id)
-  );
-   
-CREATE TABLE manages
-  (customer_representatives_login_id varchar(50) NOT NULL,
-  admins_login_id varchar(50) NOT NULL,
-  primary key (customer_representatives_login_id,admins_login_id),
-  foreign key(customer_representatives_login_id) references customer_representatives(login_id),
-  foreign key(admins_login_id) references admins(login_id)
-  );
- 
-CREATE TABLE auto_bids
-  (login_id varchar(50) NOT NULL,
-  bid_id int NOT NULL,
-  upper_limit int,
-  increment int,
-  primary key (login_id,bid_id),
-  foreign key(login_id) references buyer(login_id),
-  foreign key(bid_id) references bid(bid_id)
-  );
-  
-CREATE TABLE bids
-  (login_id varchar(50) NOT NULL,
-  bid_id int NOT NULL,
-  bid_offer int,
-  increment int,
-  primary key (login_id,bid_id),
-  foreign key(login_id) references buyer(login_id),
-  foreign key(bid_id) references bid(bid_id)
-  );
-    
-CREATE TABLE has_item
-  (item_id int NOT NULL,
-  bid_id int NOT NULL,
-  primary key (bid_id),
-  foreign key(item_id) references item(item_id),
-  foreign key(bid_id) references bid(bid_id)
-  );
-   
-CREATE TABLE sells
-  (item_id int NOT NULL,
-  login_id varchar(50) NOT NULL,
-  close_date_time datetime,
-  primary key (item_id),
-  foreign key(item_id) references item(item_id),
-  foreign key(login_id) references sellers(login_id)
-  );
- 
-CREATE TABLE removes
-  (bid_bid_id int NOT NULL,
-  illegal_bid_bid_id int NOT NULL,
-  customer_representatives_login_id varchar(50) NOT NULL,
-  primary key (bid_bid_id, illegal_bid_bid_id, customer_representatives_login_id),
-  foreign key(bid_bid_id) references bid(bid_id),
-  foreign key(illegal_bid_bid_id) references illegal_bid(bid_id),
-  foreign key(customer_representatives_login_id) references customer_representatives(login_id)
-  );
   
   CREATE TABLE alerts
 ( login_id varchar(50) NOT NULL,
@@ -247,7 +152,6 @@ CREATE TABLE removes
     primary key (question_id),
     foreign key (login_id) references end_user(login_id)
 );
-
 
 CREATE TABLE answer (
     answer_id INT(100) AUTO_INCREMENT,
@@ -355,6 +259,12 @@ VALUES (13, '64 Mega Pixel', '40X Zoom', '25 mm Lense'),
 -- DROP TABLE has_item
 -- DROP TABLE alerts;
 -- DROP TABLE winner_alerts;
+-- DROP TABLE auctions;
+-- DROP TABLE manages;
+-- DROP TABLE views;
+-- DROP TABLE support;
+-- DROP TABLE legal_bid;
+-- DROP TABLE illegal_bid;
 -- SELECT * FROM admins;
 
 -- SELECT * FROM users; 
