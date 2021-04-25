@@ -236,6 +236,9 @@ VALUES  ('maharshi', 'patel', 'maharshi', 'patel'),
         ('John', 'Smith', 'Admin_01', 'root'),
         ('Sam', 'Christian', 'Customer_Support', 'root');
         
+INSERT INTO users
+VALUES  ('Sam', 'Christian', 'Customer_Support', 'root');
+        
         
 INSERT INTO end_user
 VALUES ('maharshi@abcd.com', 'maharshi');    
@@ -350,6 +353,17 @@ INSERT INTO sells(item_id, login_id, close_date_time) VALUES
                     (4, 'michael', '2021-02-01 08:30:00'),
                     (10, 'camila', '2021-02-01 08:30:00'),
                     (8, 'francis', '2021-02-01 08:30:00');
+                    
+INSERT INTO question VALUES (1, 'Why is Mars called a Red Planet', 'annonymous', '2021-04-21'),
+  (2, 'Why does my auction item get the lowest prices? ', 'annonymous', '2021-04-21'),
+  (3, 'It says I won the auction; however it is not letting me complete my order, why?', 'annonymous', '2021-04-21'),
+  (4, 'I don\'t know how much my item is worth, can anyone help?', 'annonymous', '2021-04-22');
+
+INSERT INTO answer VALUES (1, 'Because, the surface is full of red stuff.', 1, 'Customer_Support', '2021-04-21'),
+  (2, 'This is my second answer to the red planet query. As a customer rep, I am going to ask Elon himself. :-)', 1, 'Customer_Support', '2021-04-21'),
+  (3, 'My turn to answer the Mars question! \r\nSo here is the thing:-\r\n\r\nMars is *hotter* than the sun, that\'s why it is called the red planet.\r\nIt is also close to Pluto.', 1, 'Customer_Support', '2021-04-21'),
+  (4, 'It could be because the item is not in well condition and not attracting customers', 2, 'Customer_Support', '2021-04-22');
+
        
 
 -- DROP TABLE item;
@@ -398,3 +412,5 @@ INSERT INTO sells(item_id, login_id, close_date_time) VALUES
 -- SELECT * FROM buyer;
 
 -- SELECT * FROM bid;
+
+-- SELECT * FROM answer;
