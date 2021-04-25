@@ -4,6 +4,14 @@
     --white: #ffffff;
     --black: #000000;
 }
+.item-container{
+	text-align:center;
+}
+.container a{
+	text-decoration: none;
+	color: black;
+}
+
 
 * {
     margin: 0;

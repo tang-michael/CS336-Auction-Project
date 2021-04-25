@@ -18,6 +18,7 @@
         <div class="nav-links right-nav-links">
             <a href="index.jsp">Questions</a>
             <a class="active-link" href="ask_question.jsp">Post Question</a>
+            <a href="item_list.jsp">View Items</a>
             <a href="${pageContext.request.contextPath}/logout">Logout</a>
         </div>
     </div>

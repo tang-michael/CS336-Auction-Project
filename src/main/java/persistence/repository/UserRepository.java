@@ -117,9 +117,10 @@ public class UserRepository extends Repository {
         if(admin.isPresent()){
             return admin.get();
         }
-
+        
         Optional<User> endUser = specializeAsEndUser(user);
         if(endUser.isPresent()){
+        	
             return endUser.get();
         }
 
@@ -150,6 +151,7 @@ public class UserRepository extends Repository {
 
         resultSet.close();
         statement.close();
+        
         return Optional.of(endUser);
     }
 
