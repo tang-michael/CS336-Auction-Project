@@ -43,10 +43,10 @@
             if(bidNum != null){
                 bidNum.next();
                 bidNumber = bidNum.getInt(1) + 1;
-                }
+            }
             else{
                 bidNumber = 1;
-                }
+            }
         
             st.executeUpdate("INSERT INTO bid VALUES(" + bidNumber + ", '" + loginID + "', " + bidPrice + ", " + itemId + ");"); 
         

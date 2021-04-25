@@ -26,6 +26,7 @@
             <a href="setAuction.jsp">View Auctions and Bid Items</a>
             <a class="active-link" href="index.jsp">Questions</a>
             <a href="ask_question.jsp">Post Question</a>
+            <a href="deleteAcc.jsp">Delete Account</a>
             <a href="${pageContext.request.contextPath}/logout">Logout</a>
         </div>
     </div>
