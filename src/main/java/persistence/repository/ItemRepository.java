@@ -58,7 +58,7 @@ public class ItemRepository extends Repository {
 
 	public void updateItemBid(String item_id, String bid, String upper_limit, String bid_increment,
 			String item_increment) throws SQLException {
-		String query = "UPDATE item SET item_increment=" + item_increment + ", user_increment=" + bid_increment
+		String query = "UPDATE item SET bid_increment=" + item_increment + ", user_increment=" + bid_increment
 				+ ", current_bid=" + bid + ", upper_limit=" + upper_limit + " WHERE `item_id` = " + item_id;
 		System.out.println(query);
 		PreparedStatement statement = dbConnection.prepareStatement(query);
@@ -66,12 +66,12 @@ public class ItemRepository extends Repository {
 		statement.close();
 	}
 	
-	public void setWinner(String item_id, String winner) throws SQLException {
-		String query = "UPDATE item SET current_winner='"+winner + "' WHERE `item_id`=" + item_id;
-		PreparedStatement statement = dbConnection.prepareStatement(query);
-		statement.executeUpdate();
-		statement.close();
-	}
+//	public void setWinner(String item_id, String winner) throws SQLException {
+//		String query = "UPDATE item SET current_winner='"+winner + "' WHERE `item_id`=" + item_id;
+//		PreparedStatement statement = dbConnection.prepareStatement(query);
+//		statement.executeUpdate();
+//		statement.close();
+//	}
 
 	public Item getItemByID(String id) throws SQLException {
 		String query = "SELECT * From `item` WHERE `item_id` = " + id;
@@ -86,9 +86,7 @@ public class ItemRepository extends Repository {
 		double currentBid = resultSet.getDouble("current_bid");
 		double initialPrice = resultSet.getDouble("initial_price");
 		double minPrice = resultSet.getDouble("min_price");
-		String characteristics = resultSet.getString("characteristics");
-		double item_increment = resultSet.getDouble("item_increment");
-		String current_winner = resultSet.getString("current_winner");
+		double item_increment = resultSet.getDouble("bid_increment");
 		double upper_limit = resultSet.getDouble("upper_limit");
 		double user_increment = resultSet.getDouble("user_increment");
 
@@ -101,9 +99,7 @@ public class ItemRepository extends Repository {
 		item.setCurrentBid(currentBid);
 		item.setInitialPrice(initialPrice);
 		item.setMinPrice(minPrice);
-		item.setCharacteristics(characteristics);
 		item.setItem_increment(item_increment);
-		item.setCurrent_winner(current_winner);
 		item.setUpper_limit(upper_limit);
 		item.setUser_increment(user_increment);
 
@@ -125,8 +121,7 @@ public class ItemRepository extends Repository {
 		double initialPrice = resultSet.getDouble("initial_price");
 		double minPrice = resultSet.getDouble("min_price");
 		String characteristics = resultSet.getString("characteristics");
-		String current_winner = resultSet.getString("current_winner");
-		double item_increment = resultSet.getDouble("item_increment");
+		double item_increment = resultSet.getDouble("bid_increment");
 
 		Item item = new Item();
 		item.setItemId(itemId);
@@ -138,8 +133,6 @@ public class ItemRepository extends Repository {
 		item.setCurrentBid(currentBid);
 		item.setInitialPrice(initialPrice);
 		item.setMinPrice(minPrice);
-		item.setCharacteristics(characteristics);
-		item.setCurrent_winner(current_winner);
 		item.setItem_increment(item_increment);
 
 		return item;
