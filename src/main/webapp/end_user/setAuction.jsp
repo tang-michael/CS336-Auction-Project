@@ -105,7 +105,7 @@
                     
                     if(currentdate.compareTo(closing_date_time) > 0){
                      
-                        if(Integer.parseInt(rsItems.getString("current_bid")) >= Integer.parseInt(rsItems.getString("min_price"))){                           
+                        if(Double.parseDouble(rsItems.getString("current_bid")) >= Double.parseDouble(rsItems.getString("min_price"))){                           
                             //Alert the winner
                             
                             Statement st4 = con.createStatement();
