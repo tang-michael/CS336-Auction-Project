@@ -21,7 +21,6 @@ public class Item {
     private double upper_limit;
     private double user_increment;
     private double item_increment;
-    private String characteristics;
     private String current_winner;
 
     public Item(){}
@@ -36,7 +35,6 @@ public class Item {
         currentBid = item.getCurrentBid();
         initialPrice = item.getInitialPrice();
         minPrice = item.getMinPrice();
-        characteristics = item.getCharacteristics();
         upper_limit = item.getUpper_limit();
         user_increment = item.getUser_increment();
         item_increment = item.getItem_increment();
@@ -143,13 +141,7 @@ public class Item {
         this.closingTime = closingTime;
     }
 
-    public String getCharacteristics() {
-        return characteristics;
-    }
 
-    public void setCharacteristics(String characteristics) {
-        this.characteristics = characteristics;
-    }
 
     public void setCurrentBid(double currentBid) {
         this.currentBid = currentBid;
