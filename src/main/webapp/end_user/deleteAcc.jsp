@@ -27,8 +27,6 @@
         Statement st6 = con.createStatement();
         
         
-        out.println("<p>Please make sure that you have no pending auctions and bids before deleting your account.</p><br>");
-        
         st.executeUpdate("DELETE FROM sellers s WHERE s.login_id = '" + (String)session.getAttribute("user") + "';");
         
         st1.executeUpdate("DELETE FROM buyer b WHERE b.login_id = '" + (String)session.getAttribute("user") + "';");
@@ -50,7 +48,8 @@
     }
     catch(Exception e){
         e.printStackTrace();
-        out.println("Unable to delete the user account.");
+        out.println("<p>Unable to delete the user account.</p><br>");
+        out.println("<p>Please make sure that you have no pending auctions and bids before deleting your account.</p><br>");
     }
     %>
 </body>

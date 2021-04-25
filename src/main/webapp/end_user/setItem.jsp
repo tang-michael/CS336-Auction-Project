@@ -51,8 +51,8 @@
             itemNumber = 1;
         }
         
-        st.executeUpdate("INSERT INTO item VALUES(" + itemNumber + ", '" + loginID + "', '" + "', '" + itemName + "', '" + itemType + "', '"+ brandName + "', " + 0 + ", " + 
-                                                      init_Price + ", " + bid_increment + ", " + min_Price + ", '" + closing_date + "', '" + closing_time + "');");
+        st.executeUpdate("INSERT INTO item VALUES(" + itemNumber + ", '" + loginID + "', '" + itemName + "', '" + itemType + "', '"+ brandName + "', " + 0 + ", " + 
+                                                      init_Price + ", " + bid_increment + ", " + min_Price + ", '" + closing_date + "', '" + closing_time + "', " + 0 + "," + 0 + ");");
         
         if(itemType.equals("Computer Accessories")){
             String connectivity = request.getParameter("compAccConnec");
