@@ -32,10 +32,10 @@ public class ItemService {
         }
     }
     
-    public void updateWinner(String item_id, String winner) throws SQLException {
-    	itemRepository.setWinner(item_id, winner);
-    }
-    
+//    public void updateWinner(String item_id, String winner) throws SQLException {
+//    	itemRepository.setWinner(item_id, winner);
+//    }
+//    
     public void updateItemBid(String item_id, String bid, String upper_limit, String bid_increment, String item_increment) throws SQLException {
     	itemRepository.updateItemBid(item_id, bid, upper_limit, bid_increment, item_increment);
     }
