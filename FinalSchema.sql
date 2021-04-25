@@ -289,6 +289,24 @@ VALUES ('2021-03-23', 'Customer_Support');
 
 INSERT INTO item
 VALUES (1, 1,'maharshi', 'Computer', 'Apple', 0, 10000, 5000, 'Intel Core i5');
+					 
+INSERT INTO `item` (`item_id`, `login_id`, `item_type`, `brand`, `closing_date`, `closing_time`, `current_bid`, `initial_price`, `min_price`, `bid_increment`, `upper_limit`)
+ VALUES (1, 'michael', 'iphone X', 'Apple', '2021-02-01','08:30:00', 857.99, 654.23, 223, 50, 0),
+        (2, 'maharshi', 'iPad Mini', 'Apple', '2021-02-01','08:30:00', 423.99, 321.99, 110.99, 50, 0),
+        (3, 'camila', 'Macbook Pro 2021', 'Apple', '2021-02-01','08:30:00', 1023.99, 821.99, 710.99, 20, 0),
+        (4, 'michael', 'Razer Keyboard', 'Razer', '2021-02-01','08:30:00', 89.99, 54.99, 34.99, 50, 0),
+        (5, 'michael', 'Bluesnowball Microphone', 'Bluesnowball', '2021-02-01','08:30:00', 54.99, 43.99, 40.99,  50, 0),
+        (6, 'maharshi', 'Apple Airpods', 'Apple', '2021-02-01','08:30:00', 69.99, 59.99, 55.99, 50, 0),
+        (7, 'camila', 'HP Spectre Laptop', 'HP', '2021-02-01','08:30:00', 1022.99, 812.99, 712.99,50, 0),
+        (8, 'francis', 'Samsung 27" Monitor', 'Samsung', '2021-02-01','08:30:00', 219.99, 210.99, 199.99, 50, 0),
+        (9, 'maharshi', 'College Rule Notebook', 'College Rule', '2021-02-01','08:30:00', 9.99, 8.99, 7.99,50, 0),
+        (10, 'camila', 'HP Officejet Pro 8620', 'HP', '2021-02-01','08:30:00', 213.99, 199.99, 154.99, 50, 0),
+        (11, 'francis', 'Reddragon Lite Mouse', 'Apple', '2021-02-01','08:30:00', 423.99, 321.99, 110.99, 50, 0),
+        (12, 'camila', 'Cyberpower PC Desktop', 'Cyberpower', '2021-02-01','08:30:00', 1299.99, 1019.99, 999.99, 50,0),
+        (13, 'michael', 'Nike Sneakers', 'Nike', '2021-02-01','08:30:00', 129.99, 99.99, 89.99, 50, 0),
+        (14, 'maharshi', 'Addidas Sneakers', 'Addidas', '2021-02-01','08:30:00', 199.99, 159.99, 129.99, 50, 0),
+        (15, 'camila', 'iMac 2020', 'Apple', '2021-02-01','08:30:00', 2099.99, 1999.99, 1499.99, 50, 0);
+
 
 -- DROP TABLE item;
 -- DROP TABLE computer_accessories;
