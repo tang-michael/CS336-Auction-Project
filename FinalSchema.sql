@@ -17,6 +17,11 @@ CREATE TABLE end_user
   primary key (login_id),
   foreign key(login_id) references users(login_id)
   );
+  
+  CREATE TABLE auctions
+( auction_id int NOT NULL,
+  history_of_bids varchar(100),
+  primary key(auction_id ));
 
 CREATE TABLE buyer
   (alerts varchar(50),
@@ -172,6 +177,57 @@ CREATE TABLE sales_reports (
     primary key (sales_report_id)
 );
 
+CREATE TABLE legal_bid
+  (bid_id int NOT NULL,
+  login_id varchar(50) NOT NULL,
+  primary key (bid_id),
+  foreign key(login_id) references users(login_id)
+  );
+   
+CREATE TABLE illegal_bid
+  (bid_id int NOT NULL,
+  login_id varchar(50) NOT NULL,
+  primary key (bid_id),
+  foreign key(login_id) references users(login_id)
+  );
+  
+  CREATE TABLE has_item
+  (item_id int NOT NULL,
+  bid_id int NOT NULL,
+  primary key (bid_id),
+  foreign key(item_id) references item(item_id),
+  foreign key(bid_id) references bid(bid_id)
+  );
+   
+CREATE TABLE sells
+  (item_id int NOT NULL,
+  login_id varchar(50) NOT NULL,
+  close_date_time datetime,
+  primary key (item_id),
+  foreign key(item_id) references item(item_id),
+  foreign key(login_id) references sellers(login_id)
+  );
+  
+  CREATE TABLE auto_bids
+  (login_id varchar(50) NOT NULL,
+  bid_id int NOT NULL,
+  upper_limit int,
+  increment int,
+  primary key (login_id,bid_id),
+  foreign key(login_id) references buyer(login_id),
+  foreign key(bid_id) references bid(bid_id)
+  );
+  
+CREATE TABLE bids
+  (login_id varchar(50) NOT NULL,
+  bid_id int NOT NULL,
+  bid_offer int,
+  increment int,
+  primary key (login_id,bid_id),
+  foreign key(login_id) references buyer(login_id),
+  foreign key(bid_id) references bid(bid_id)
+  );
+
 INSERT INTO users
 VALUES  ('maharshi', 'patel', 'maharshi', 'patel'),
         ('michael', 'tang', 'michael', 'tang'),
@@ -192,6 +248,12 @@ VALUES ('michael@abcd.com', 'michael');
 
 INSERT INTO end_user
 VALUES ('camila@abcd.com', 'camila');
+
+INSERT INTO end_user
+VALUES ('annon@abcd.com', 'annonymous');
+
+INSERT INTO users
+VALUES ('annonymous', 'annonymous', 'annonymous', 'annonymous');
       
 
 INSERT INTO admins 
@@ -242,6 +304,53 @@ VALUES (13, '64 Mega Pixel', '40X Zoom', '25 mm Lense'),
        (15, '64 Mega Pixel', '40X Zoom', '35 mm Lense'),
        (16, '64 Mega Pixel', '40X Zoom', '50 mm Lense');
        
+INSERT INTO auctions (auction_id, history_of_bids) VALUES (1, 'Test History 1'),
+                                                          (2, 'Test History 2'),
+                                                          (3, 'Test History 3'),
+                                                          (4, 'Test History 4');
+                                                          
+INSERT INTO sellers VALUES ('michael'), ('maharshi'), ('camila'), ('francis');
+INSERT INTO buyer VALUES ('', 'michael'), ('', 'maharshi'), ('', 'camila'), ('', 'francis');
+INSERT INTO admins VALUES ('2021-03-23', 'Admin_01');
+INSERT INTO customer_representatives VALUES ('2021-03-23', 'Customer_Support');
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (2, 'francis', 110, 4);
+INSERT INTO has_item (item_id, bid_id) VALUES (4, 2);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 2, 110, 20);
+INSERT INTO legal_bid (bid_id, login_id) VALUES (2, 'francis');
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (3, 'francis', 174, 10);
+INSERT INTO has_item (item_id, bid_id) VALUES (10, 3);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 3, 174, 10);
+INSERT INTO legal_bid (bid_id, login_id) VALUES (3, 'francis');
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (4, 'maharshi', 200, 8);
+INSERT INTO has_item (item_id, bid_id) VALUES (8, 4);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('maharshi', 4, 200, 15);
+INSERT INTO legal_bid (bid_id, login_id) VALUES (4, 'maharshi');
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (5, 'francis', 6, 13);
+INSERT INTO has_item (item_id, bid_id) VALUES (13, 5);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 5, 6, 1);
+INSERT INTO illegal_bid (bid_id, login_id) VALUES (5, 'francis');
+
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (6, 'francis', 100, 7);
+INSERT INTO has_item (item_id, bid_id) VALUES (7, 6);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('francis', 6, 100, 5);
+INSERT INTO illegal_bid (bid_id, login_id) VALUES (6, 'francis');
+
+INSERT INTO bid (bid_id, login_id, amount, item_id) VALUES (7, 'camila', 50, 2);
+INSERT INTO has_item (item_id, bid_id) VALUES (2, 7);
+INSERT INTO bids (login_id, bid_id, bid_offer, increment) VALUES ('camila', 7, 50, 0);
+INSERT INTO illegal_bid (bid_id, login_id) VALUES (7, 'camila');
+
+
+INSERT INTO sells(item_id, login_id, close_date_time) VALUES
+                    (4, 'michael', '2021-02-01 08:30:00'),
+                    (10, 'camila', '2021-02-01 08:30:00'),
+                    (8, 'francis', '2021-02-01 08:30:00');
+       
 
 -- DROP TABLE item;
 -- DROP TABLE computer_accessories;
@@ -265,9 +374,12 @@ VALUES (13, '64 Mega Pixel', '40X Zoom', '25 mm Lense'),
 -- DROP TABLE support;
 -- DROP TABLE legal_bid;
 -- DROP TABLE illegal_bid;
+
 -- SELECT * FROM admins;
 
 -- SELECT * FROM users; 
+
+-- SELECT * FROM end_user;
 
 -- SELECT * FROM item;
 
@@ -281,5 +393,8 @@ VALUES (13, '64 Mega Pixel', '40X Zoom', '25 mm Lense'),
 
 -- SELECT * FROM winner_alerts; 
 
--- 
+-- SELECT * FROM sellers;
 
+-- SELECT * FROM buyer;
+
+-- SELECT * FROM bid;
