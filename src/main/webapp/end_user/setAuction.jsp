@@ -86,7 +86,6 @@
                     <th>Item type</th>
                     <th>Brand</th>
                     <th>Initial Price</th>
-                    <th>Characteristics</th>
                     <th>Closing Date</th>
                     <th>Closing Time</th>
                 </tr>
@@ -134,7 +133,6 @@
                     <td><%=rsItems.getString("item_type")%></td>
                     <td><%=rsItems.getString("brand")%></td>
                     <td>$<%=rsItems.getString("initial_price")%></td>
-                    <td><%=rsItems.getString("characteristics")%></td>
                     <td><%=rsItems.getString("closing_date") %></td>
                     <td><%=rsItems.getString("closing_time") %></td>
                 </tr>

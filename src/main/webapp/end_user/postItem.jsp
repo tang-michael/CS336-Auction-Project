@@ -9,19 +9,101 @@
         <link href="../css/core.css" rel="stylesheet" />
         <title>Post Item</title>
     </head>
+    <script type="text/javascript">
+    
+    function selectCharacteristics(){
+    	if(document.getElementById('computerAccessories').checked){
+    		
+    		document.getElementById('comp_acc_connectivity').style.display = 'block';
+    		document.getElementById('comp_acc_color').style.display = 'block';
+    		document.getElementById('comp_acc_battery').style.display = 'block';
+    		
+    		document.getElementById('comp_size').style.display = 'none';
+    		document.getElementById('comp_proc').style.display = 'none';
+    		document.getElementById('comp_ram').style.display = 'none';
+    		
+    		document.getElementById('phone_connectivity').style.display = 'none';
+    		document.getElementById('phone_storage').style.display = 'none';
+    		document.getElementById('phone_camera').style.display = 'none';
+    		
+    		document.getElementById('camera_pixel').style.display = 'none';
+    		document.getElementById('camera_zoom').style.display = 'none';
+    		document.getElementById('camera_lenses').style.display = 'none';
+    		
+    	}
+    	else if(document.getElementById('computers').checked){
+    		
+    		document.getElementById('comp_acc_connectivity').style.display = 'none';
+            document.getElementById('comp_acc_color').style.display = 'none';
+            document.getElementById('comp_acc_battery').style.display = 'none';
+            
+            document.getElementById('comp_size').style.display = 'block';
+            document.getElementById('comp_proc').style.display = 'block';
+            document.getElementById('comp_ram').style.display = 'block';
+            
+            document.getElementById('phone_connectivity').style.display = 'none';
+            document.getElementById('phone_storage').style.display = 'none';
+            document.getElementById('phone_camera').style.display = 'none';
+            
+            document.getElementById('camera_pixel').style.display = 'none';
+            document.getElementById('camera_zoom').style.display = 'none';
+            document.getElementById('camera_lenses').style.display = 'none';
+    		
+    	}
+    	else if(document.getElementById('phones').checked){
+    		
+    		document.getElementById('comp_acc_connectivity').style.display = 'none';
+            document.getElementById('comp_acc_color').style.display = 'none';
+            document.getElementById('comp_acc_battery').style.display = 'none';
+            
+            document.getElementById('comp_size').style.display = 'none';
+            document.getElementById('comp_proc').style.display = 'none';
+            document.getElementById('comp_ram').style.display = 'none';
+            
+            document.getElementById('phone_connectivity').style.display = 'block';
+            document.getElementById('phone_storage').style.display = 'block';
+            document.getElementById('phone_camera').style.display = 'block';
+            
+            document.getElementById('camera_pixel').style.display = 'none';
+            document.getElementById('camera_zoom').style.display = 'none';
+            document.getElementById('camera_lenses').style.display = 'none';
+    		
+    	}
+    	else{
+    		
+    		document.getElementById('comp_acc_connectivity').style.display = 'none';
+            document.getElementById('comp_acc_color').style.display = 'none';
+            document.getElementById('comp_acc_battery').style.display = 'none';
+            
+            document.getElementById('comp_size').style.display = 'none';
+            document.getElementById('comp_proc').style.display= 'none';
+            document.getElementById('comp_ram').style.display = 'none';
+            
+            document.getElementById('phone_connectivity').style.display = 'none';
+            document.getElementById('phone_storage').style.display = 'none';
+            document.getElementById('phone_camera').style.display = 'none';
+            
+            document.getElementById('camera_pixel').style.display = 'block';
+            document.getElementById('camera_zoom').style.display = 'block';
+            document.getElementById('camera_lenses').style.display = 'block';
+    		
+    	}
+    }
+    
+    </script>
     <body>
         
         <form action="setItem.jsp" method="post">
-            <input type="radio" id="computerAccessories" name="type" value = "computerAccessories">
+            <input type="radio" onclick="javascript:selectCharacteristics();" id="computerAccessories" name="type" value = "Computer Accessories">
             <label for="computerAccessories">Computer Accessories</label>
             <br>
-            <input type="radio" id="computers" name="type" value = "computers">
+            <input type="radio" onclick="javascript:selectCharacteristics();" id="computers" name="type" value = "Computers">
             <label for="computers">Computers</label>
             <br>
-            <input type="radio" id="phones" name="type" value = "phones">
+            <input type="radio" onclick="javascript:selectCharacteristics();" id="phones" name="type" value = "Phones">
             <label for="phones">Phones</label>
             <br>
-            <input type="radio" id="cameras" name="type" value = "cameras">
+            <input type="radio" onclick="javascript:selectCharacteristics();" id="cameras" name="type" value = "Cameras">
             <label for="cameras">Cameras</label>
             <br>
             Login ID (Please use your own login id):<input type="text" name="login_id" />
@@ -32,7 +114,29 @@
             <br>
             Item Name :<input type="text" name="itemName" />
             <br>
-            Characteristics :<input type="text" name="characteristics" />
+            <div id="comp_acc_connectivity" style="display:none"> Connectivity :<input type="text" id="compAccConnec" name="compAccConnec"></div>
+            <br>
+            <div id="comp_acc_color" style="display:none"> Color :<input type="text" id="compAccCol" name="compAccCol"></div>
+            <br>
+            <div id="comp_acc_battery" style="display:none"> Batteries :<input type="text" id="compAccBat" name="compAccBat"></div>
+            <br>
+            <div id="comp_size" style="display:none"> Screen Size :<input type="text" id="compScreenSize" name="compScreenSize"></div>
+            <br>
+            <div id="comp_proc" style="display:none"> Processor :<input type="text" id="compProc" name="compProc"></div>
+            <br>
+            <div id="comp_ram" style="display:none"> RAM :<input type="text" id="compRam" name="compRam"></div>
+            <br>
+            <div id="phone_connectivity" style="display:none"> Wireless Connectivity :<input type="text" id="phoneConnec" name="phoneConnec"></div>
+            <br>
+            <div id="phone_storage" style="display:none"> Storage :<input type="text" id="phoneStorage" name="phoneStorage"></div>
+            <br>
+            <div id="phone_camera" style="display:none"> Camera Features :<input type="text" id="phoneCamera" name="phoneCamera"></div>
+            <br>
+            <div id="camera_pixel" style="display:none"> MegaPixels :<input type="text" id="cameraPixel" name="cameraPixel"></div>
+            <br>
+            <div id="camera_zoom" style="display:none"> Zoom :<input type="text" id="cameraZomm" name="cameraZoom"></div>
+            <br>
+            <div id="camera_lenses" style="display:none"> Lenses :<input type="text" id="cameraLenses" name="cameraLenses"></div>
             <br>
             Minimum Price (Optional) :<input type="text" name="minPrice" />
             <br>

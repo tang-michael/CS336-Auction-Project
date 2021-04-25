@@ -52,20 +52,35 @@
         }
         
         st.executeUpdate("INSERT INTO item VALUES(" + itemNumber + ", '" + loginID + "', '" + itemType + "', '"+ brandName + "', " + 0 + ", " + 
-                                                      init_Price + ", " + min_Price + ", '" + characteristics + "', '" + closing_date + 
-                                                      "', '" + closing_time + "');");
+                                                      init_Price + ", " + min_Price + ", '" + closing_date + "', '" + closing_time + "');");
         
-        if(itemType.equals("computerAccessories")){
-            st1.executeUpdate("INSERT INTO computer_accessories VALUES(" + itemNumber  + ");");
+        if(itemType.equals("Computer Accessories")){
+            String connectivity = request.getParameter("compAccConnec");
+            String color = request.getParameter("compAccCol");
+            String battery = request.getParameter("compAccBat");
+            st1.executeUpdate("INSERT INTO computer_accessories VALUES(" + itemNumber  + ", '" + connectivity + "', '" + 
+                               color + "', '" + battery + "');");
         }
-        else if(itemType.equals("computers")){
-            st2.executeUpdate("INSERT INTO computers VALUES(" + itemNumber + ");");
+        else if(itemType.equals("Computers")){
+            String screen_size = request.getParameter("compScreenSize");
+            String processor = request.getParameter("compProc");
+            String ram = request.getParameter("compRam");
+            st2.executeUpdate("INSERT INTO computers VALUES(" + itemNumber + ", '" + screen_size + "', '" + 
+                               processor + "', '" + ram + "');");
         }
-        else if(itemType.equals("phones")){
-            st3.executeUpdate("INSERT INTO phones VALUES(" + itemNumber  + ");");
+        else if(itemType.equals("Phones")){
+            String wireless_connectivity = request.getParameter("phoneConnec");
+            String storage_size = request.getParameter("phoneStorage");
+            String camera_features = request.getParameter("phoneCamera");
+            st3.executeUpdate("INSERT INTO phones VALUES(" + itemNumber  + ", '" + wireless_connectivity + "', '" +
+                               storage_size + "', '" + camera_features + "');");
         }
         else{
-            st4.executeUpdate("INSERT INTO camera VALUES(" + itemNumber  + ");");
+            String pixels = request.getParameter("cameraPixel");
+            String zoom = request.getParameter("cameraZoom");
+            String lenses = request.getParameter("cameraLenses");
+            st4.executeUpdate("INSERT INTO cameras VALUES(" + itemNumber  + ", '" + pixels + "', '" + 
+                               zoom + "', '" + lenses + "');");
         }
         out.println("Thank you for registering the item.");
         out.println("<p>To go back to the auctions page: <a href=setAuction.jsp>Auctions</a></p>");
