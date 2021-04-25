@@ -67,12 +67,11 @@ CREATE TABLE item
   login_id varchar(50) NOT NULL,
   item_type varchar(200),
   brand varchar(25),
-  closing_date date,
-  closing_time time,
   current_bid float NOT NULL,
   initial_price float NOT NULL,
   min_price float NOT NULL,
-  characteristics varchar(100),
+  closing_date date,
+  closing_time time,
   primary key (item_id),
   foreign key(login_id) references users(login_id)
   );
@@ -80,24 +79,36 @@ CREATE TABLE item
 CREATE TABLE computer_accessories
   (item_id int NOT NULL,
   primary key (item_id),
+  connectivity varchar(50),
+  color varchar(50),
+  battery varchar(50),
   foreign key(item_id) references item(item_id)
   );
   
 CREATE TABLE phones
   (item_id int NOT NULL,
   primary key (item_id),
+  wireless_connectivity varchar(50),
+  storage_size varchar(50),
+  camera_features varchar(50),
   foreign key(item_id) references item(item_id)
   );
   
 CREATE TABLE computers
   (item_id int NOT NULL,
   primary key (item_id),
+  screen_size varchar(50),
+  processor varchar(50),
+  ram varchar(50),
   foreign key(item_id) references item(item_id)
   );
    
 CREATE TABLE cameras
   (item_id int NOT NULL,
   primary key (item_id),
+  pixels varchar(50),
+  zoom varchar(50),
+  lenses varchar(50),
   foreign key(item_id) references item(item_id)
   );
   
@@ -202,6 +213,53 @@ CREATE TABLE removes
   foreign key(illegal_bid_bid_id) references illegal_bid(bid_id),
   foreign key(customer_representatives_login_id) references customer_representatives(login_id)
   );
+  
+  CREATE TABLE alerts
+( login_id varchar(50) NOT NULL,
+  item_id int NOT NULL,
+  current_bid float NOT NULL,
+  primary key(login_id, item_id),
+  foreign key(login_id) references users(login_id),
+  foreign key(item_id) references item(item_id)
+  );
+  
+  CREATE TABLE winner_alerts
+  ( login_id varchar(50) NOT NULL,
+  item_id int NOT NULL,
+  current_bid float NOT NULL,
+  primary key(login_id, item_id),
+  foreign key(login_id) references users(login_id),
+  foreign key(item_id) references item(item_id)
+  );
+  
+  CREATE TABLE question (
+    question_id INT(100) AUTO_INCREMENT,
+    question VARCHAR(100),
+    login_id VARCHAR(100),
+    created date,
+    primary key (question_id),
+    foreign key (login_id) references end_user(login_id)
+);
+
+
+CREATE TABLE answer (
+    answer_id INT(100) AUTO_INCREMENT,
+    answer VARCHAR(255),
+    question_id INT (100),
+    login_id VARCHAR (50),
+    created date,
+    primary key (answer_id),
+    foreign key (question_id) references question(question_id),
+    foreign key (login_id) references customer_representatives(login_id)
+);
+
+CREATE TABLE sales_reports (
+    sales_report_id INT(100) AUTO_INCREMENT,
+    earnings_per_item TEXT,
+    earnings_per_buyer TEXT,
+    generated_date DATE,
+    primary key (sales_report_id)
+);
 
 INSERT INTO users
 VALUES	('maharshi', 'patel', 'maharshi', 'patel'),
