@@ -69,6 +69,7 @@ CREATE TABLE item
   brand varchar(25),
   current_bid float NOT NULL,
   initial_price float NOT NULL,
+  bid_increment float NOT NULL,
   min_price float NOT NULL,
   closing_date date,
   closing_time time,

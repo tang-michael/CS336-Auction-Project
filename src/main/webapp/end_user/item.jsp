@@ -88,21 +88,13 @@
     <br />
     <form action="bidItem.jsp" method="post">
         <%
-        Timestamp currentdate = new Timestamp(System.currentTimeMillis());
-        
-        String closing_date = rsItems.getString("closing_date");
-        String closing_time = rsItems.getString("closing_time");
-        
-        Timestamp closing_date_time = new Timestamp(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(closing_date + " " + closing_time).getTime());
-        
-        if(currentdate.compareTo(closing_date_time) > 0){
-            out.println("<p>This auction is closed. Please do not place a bid</p>");
-            out.println("<br><p>Return to the previous page<a href = setAuction.jsp>Auctions</a></p>");
-        }
+        out.println("Please enter a bid higher than or equal to $" + ((rsItems.getDouble("current_bid") + rsItems.getDouble("bid_increment"))) + "<br>");
         %>
-        Bid:<input type="text" name="bid_price" required/>
+        Bid:<input type="text" id="bid_price" name="bid_price" required/>
         <br>
         <input type ="hidden" id="item_id" name="item_id" value=<%=request.getParameter("item_id")%>>
+        <input type ="hidden" id="bid_increment" name="bid_increment" value=<%=rsItems.getDouble("bid_increment")%>>
+        <input type ="hidden" id="current_bid" name="current_bid" value=<%=rsItems.getDouble("current_bid")%>>
         
         <input type ="submit" value = "Submit" />
     </form>

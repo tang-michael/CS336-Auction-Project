@@ -28,7 +28,7 @@
         String brandName = request.getParameter("brandName");
         double init_Price = Double.parseDouble(request.getParameter("initPrice"));
         String itemName = request.getParameter("itemName");
-        String characteristics = request.getParameter("characteristics");
+        double bid_increment = Double.parseDouble(request.getParameter("bidIncrement"));
         double min_Price;
         if(request.getParameter("minPrice").equals("")){
             min_Price = 0;
@@ -52,7 +52,7 @@
         }
         
         st.executeUpdate("INSERT INTO item VALUES(" + itemNumber + ", '" + loginID + "', '" + itemType + "', '"+ brandName + "', " + 0 + ", " + 
-                                                      init_Price + ", " + min_Price + ", '" + closing_date + "', '" + closing_time + "');");
+                                                      init_Price + ", " + bid_increment + ", " + min_Price + ", '" + closing_date + "', '" + closing_time + "');");
         
         if(itemType.equals("Computer Accessories")){
             String connectivity = request.getParameter("compAccConnec");

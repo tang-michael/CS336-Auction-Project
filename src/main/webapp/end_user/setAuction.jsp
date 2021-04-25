@@ -124,6 +124,8 @@
                                               "' AND a.item_id = " + rsItems.getInt("item_id") + ";");
                                
                         }
+                        
+                        continue;
                     }
                 %>
                 <tr>

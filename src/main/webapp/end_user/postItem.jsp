@@ -106,8 +106,8 @@
             <input type="radio" onclick="javascript:selectCharacteristics();" id="cameras" name="type" value = "Cameras">
             <label for="cameras">Cameras</label>
             <br>
-            Login ID (Please use your own login id):<input type="text" name="login_id" />
-            <br>
+            <input type ="hidden" id="login_id" name="login_id" value=<%=(String)session.getAttribute("user")%>>
+            
             Brand Name:<input type="text" name="brandName" />
             <br>
             Initial Price:<input type="text" name="initPrice" />
@@ -137,6 +137,8 @@
             <div id="camera_zoom" style="display:none"> Zoom :<input type="text" id="cameraZomm" name="cameraZoom"></div>
             <br>
             <div id="camera_lenses" style="display:none"> Lenses :<input type="text" id="cameraLenses" name="cameraLenses"></div>
+            <br>
+            Bid Increment :<input type="text" name="bidIncrement" />
             <br>
             Minimum Price (Optional) :<input type="text" name="minPrice" />
             <br>
