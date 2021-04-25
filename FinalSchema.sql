@@ -68,6 +68,7 @@ CREATE TABLE illegal_bid
 CREATE TABLE item
   (item_id int NOT NULL AUTO_INCREMENT,
   login_id varchar(50) NOT NULL,
+  item_name varchar(200),
   item_type varchar(200),
   brand varchar(25),
   current_bid float NOT NULL,
@@ -268,8 +269,8 @@ CREATE TABLE sales_reports (
 );
 
 INSERT INTO users
-VALUES	('maharshi', 'patel', 'maharshi', 'patel'),
-		('michael', 'tang', 'michael', 'tang'),
+VALUES  ('maharshi', 'patel', 'maharshi', 'patel'),
+        ('michael', 'tang', 'michael', 'tang'),
         ('francis', 'adu', 'francis', 'adu'),
         ('camila', 'mata', 'camila', 'mata'),
         ('John', 'Smith', 'Admin_01', 'root'),
@@ -280,7 +281,13 @@ INSERT INTO end_user
 VALUES ('maharshi@abcd.com', 'maharshi');    
 
 INSERT INTO end_user
-VALUES ('francis@abcd.com', 'francis');    
+VALUES ('francis@abcd.com', 'francis');
+
+INSERT INTO end_user
+VALUES ('michael@abcd.com', 'michael');    
+
+INSERT INTO end_user
+VALUES ('camila@abcd.com', 'camila');
       
 
 INSERT INTO admins 
@@ -289,26 +296,48 @@ VALUES ('2021-03-23', 'Admin_01');
 INSERT INTO customer_representatives
 VALUES ('2021-03-23', 'Customer_Support');
 
-INSERT INTO item
-VALUES (1, 1,'maharshi', 'Computer', 'Apple', 0, 10000, 5000, 'Intel Core i5');
-					 
-INSERT INTO `item` (`item_id`, `login_id`, `item_type`, `brand`, `closing_date`, `closing_time`, `current_bid`, `initial_price`, `min_price`, `bid_increment`, `upper_limit`)
- VALUES (1, 'michael', 'iphone X', 'Apple', '2021-02-01','08:30:00', 857.99, 654.23, 223, 50, 0),
-        (2, 'maharshi', 'iPad Mini', 'Apple', '2021-02-01','08:30:00', 423.99, 321.99, 110.99, 50, 0),
-        (3, 'camila', 'Macbook Pro 2021', 'Apple', '2021-02-01','08:30:00', 1023.99, 821.99, 710.99, 20, 0),
-        (4, 'michael', 'Razer Keyboard', 'Razer', '2021-02-01','08:30:00', 89.99, 54.99, 34.99, 50, 0),
-        (5, 'michael', 'Bluesnowball Microphone', 'Bluesnowball', '2021-02-01','08:30:00', 54.99, 43.99, 40.99,  50, 0),
-        (6, 'maharshi', 'Apple Airpods', 'Apple', '2021-02-01','08:30:00', 69.99, 59.99, 55.99, 50, 0),
-        (7, 'camila', 'HP Spectre Laptop', 'HP', '2021-02-01','08:30:00', 1022.99, 812.99, 712.99,50, 0),
-        (8, 'francis', 'Samsung 27" Monitor', 'Samsung', '2021-02-01','08:30:00', 219.99, 210.99, 199.99, 50, 0),
-        (9, 'maharshi', 'College Rule Notebook', 'College Rule', '2021-02-01','08:30:00', 9.99, 8.99, 7.99,50, 0),
-        (10, 'camila', 'HP Officejet Pro 8620', 'HP', '2021-02-01','08:30:00', 213.99, 199.99, 154.99, 50, 0),
-        (11, 'francis', 'Reddragon Lite Mouse', 'Apple', '2021-02-01','08:30:00', 423.99, 321.99, 110.99, 50, 0),
-        (12, 'camila', 'Cyberpower PC Desktop', 'Cyberpower', '2021-02-01','08:30:00', 1299.99, 1019.99, 999.99, 50,0),
-        (13, 'michael', 'Nike Sneakers', 'Nike', '2021-02-01','08:30:00', 129.99, 99.99, 89.99, 50, 0),
-        (14, 'maharshi', 'Addidas Sneakers', 'Addidas', '2021-02-01','08:30:00', 199.99, 159.99, 129.99, 50, 0),
-        (15, 'camila', 'iMac 2020', 'Apple', '2021-02-01','08:30:00', 2099.99, 1999.99, 1499.99, 50, 0);
-
+INSERT INTO item (item_id, login_id, item_name,item_type, brand, initial_price, current_bid, bid_increment, min_price, closing_date, closing_time, user_increment, upper_limit)
+VALUES (1, 'maharshi', 'Macbook Pro','Computers', 'Apple', 10000, 0, 100, 5000, '2021-05-25', '11:59:00', 0, 0),
+       (2, 'francis', 'Macbook Pro', 'Computers', 'Apple', 10000, 0, 100, 5000, '2021-05-25', '11:59:00', 0, 0),
+       (3, 'michael', 'Macbook Pro', 'Computers', 'Apple', 10000, 0, 100, 5000, '2021-05-25', '11:59:00', 0, 0),
+       (4, 'camila', 'Macbook Pro', 'Computers', 'Apple', 10000, 0, 100, 5000, '2021-05-25', '11:59:00', 0, 0),
+       (5, 'maharshi', 'Keyboard', 'Computer Accessories', 'Dell', 100, 0, 100, 50, '2021-05-25', '11:59:00', 0, 0),
+       (6, 'francis', 'Mouse', 'Computer Accessories', 'Dell', 100, 0, 100, 50, '2021-05-25', '11:59:00', 0, 0),
+       (7, 'michael', 'Mouse', 'Computer Accessories', 'Dell', 100, 0, 100, 50, '2021-05-25', '11:59:00', 0, 0),
+       (8, 'camila', 'Keyboard', 'Computer Accessories', 'Dell', 100, 0, 100, 50, '2021-05-25', '11:59:00', 0, 0),
+       (9, 'maharshi', 'Iphone 12', 'Phones', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (10, 'francis', 'Iphone 11', 'Phones', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (11, 'michael', 'Iphone 12', 'Phones', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (12, 'camila', 'Iphone 11', 'Phones', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (13, 'maharshi', 'EOS 12', 'Cameras', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (14, 'francis', 'EOS 11', 'Cameras', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (15, 'michael', 'EOS 12', 'Cameras', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0),
+       (16, 'camila', 'EOS 11', 'Cameras', 'Apple', 1000, 0, 100, 500, '2021-05-25', '11:59:00', 0, 0);
+       
+INSERT INTO computers (item_id, screen_size, processor, ram)
+VALUES (1, '15.6 inches', 'Intel Core i5', '8 GB RAM'),
+       (2, '13 inches', 'Intel Core i5', '8 GB RAM'),
+       (3, '14 inches', 'Intel Core i5', '8 GB RAM'),
+       (4, '15.6 inches', 'Intel Core i5', '12 GB RAM');
+       
+INSERT INTO computer_accessories (item_id, connectivity, color, battery)
+VALUES (5, 'Wired', 'Grey', 'AA Batteries Required'),
+       (6, 'Wireless', 'Grey', 'AA Batteries Required'),
+       (7, 'Wired', 'Black', 'AA Batteries Required'),
+       (8, 'Wired', 'Grey', 'Chargable');
+       
+INSERT INTO phones (item_id, wireless_connectivity, storage_size, camera_features)
+VALUES (9, '5G', '128 GB', 'Telephoto Camera'),
+       (10, '4G', '128 GB', 'Telephoto Camera'),
+       (11, '5G', '128 GB', 'Telephoto Camera'),
+       (12, '4G', '128 GB', 'Ultra Wide Camera');
+       
+INSERT INTO cameras (item_id, pixels, zoom, lenses)
+VALUES (13, '64 Mega Pixel', '40X Zoom', '25 mm Lense'),
+       (14, '32 Mega Pixel', '20X Zoom', '25 mm Lense'),
+       (15, '64 Mega Pixel', '40X Zoom', '35 mm Lense'),
+       (16, '64 Mega Pixel', '40X Zoom', '50 mm Lense');
+       
 
 -- DROP TABLE item;
 -- DROP TABLE computer_accessories;
