@@ -24,7 +24,7 @@
             <%=user.getFullName()%></h2>
         <div class="nav-links right-nav-links">
             <a class="active-link" href="index.jsp">Questions</a> <a
-                href="ask_question.jsp">Post Question</a> <a href="item_list.jsp">View
+                href="ask_question.jsp">Post Question</a> <a href="setAuction.jsp">View
                 Items</a> <a href="${pageContext.request.contextPath}/logout">Logout</a>
         </div>
     </div>
@@ -61,9 +61,6 @@
             <br />
             <br />
             <b>Initial Price: </b> $<%=item.getInitialPrice() %> 
-            <br />
-            <br />
-            <b>Current Winner: </b> <%=item.getCurrent_winner() %>
             <br />
             <br />
             <b>Upper Limit: </b> $<%=item.getUpper_limit() %>  
